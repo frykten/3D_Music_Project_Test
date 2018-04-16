@@ -1,86 +1,104 @@
 <template lang="html">
-	<section class="chat window" id="smurf">
-	    <div class="arrow chat-arrow">
-		<icon name='chevron-right' scale="5"></icon>
+	<section id="chat" :class="{hidden: isHidden}">
+	    <div id="arrow">
+	    	<div @click="showChat()">
+				<icon :name='arrow' scale="5"></icon>
+	    	</div>
 	    </div>
 	    
-	    <section class="content">
-		<header>
-		    <h2>Chat</h2>
-		</header>
-		
-		<div class="messages">
-		    <p>Smurf</p>
-		</div>
-		
-		<footer>
-		    <input type="text" placeholder="Message here">
-		    <button><icon name='check'></icon></button>
-		</footer>
+	    <section id="content">
+			<header id="header">
+				<h2>Chat</h2>
+			</header>
+
+			<div id="messages">
+				<p>Smurf</p>
+			</div>
+
+			<div id="footer">
+				<input type="text" placeholder="Message here">
+				<button><icon name='check'></icon></button>
+			</div>
 	    </section>
 	</section>
 </template>
 
 <script>
-export default {
-}
+	export default {
+		data() {
+			return {
+				isHidden: true,
+				arrow: "chevron-right"
+			}
+		},
+		methods: {
+			showChat() {
+				this.isHidden = !this.isHidden;
+				this.arrow = this.isHidden ? "chevron-right" : "chevron-left";
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>
-.chat {
-    position: absolute;
-    bottom: 6vh;
-    width: 15rem;
-    height: 22rem;
-    background-color: rgba(211, 211, 211, 0.4);
-}
+	#chat {
+		background-color: rgba(211, 211, 211, 0.4);
+		bottom: 6vh;
+		height: 22rem;
+		position: absolute;
+		width: 15rem;
+	}
 
-.chat .arrow {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    right: -2.5em;
-}
+	.hidden {
+		left: -15rem;
+	}
 
-.chat .content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: white;
-}
+	#arrow {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100%;
+		right: -1.75em;
+	}
 
-.chat header {
-    padding: .5em;
-    font-size: 1.2rem;
-    border-bottom: solid 1px white;
-    border-bottom-right-radius: 7px;
-}
+	#content {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		color: white;
+	}
 
-.chat .messages {
-    margin: auto;
-    padding: 10px 5px;
-    width: 90%;
-    height: inherit;
-}
+	#header {
+		padding: .5em;
+		font-size: 1.2rem;
+		border-bottom: solid 1px white;
+		border-bottom-right-radius: 7px;
+	}
 
-.chat footer {
-    display: flex;
-    width: 100%;
-    height: 1.5rem;
-}
+	#messages {
+		margin: auto;
+		padding: 10px 5px;
+		width: 90%;
+		height: inherit;
+	}
 
-.chat input {
-    padding-left: 10px;
-    width: 90%;
-    border: 0;
-}
+	#footer {
+		display: flex;
+		width: 100%;
+		height: 1.5rem;
+	}
 
-.chat button {
-    width: 10%;
-    border: 0;
-}
+	#chat input {
+		padding-left: 10px;
+		width: 90%;
+		border: 0;
+	}
+
+	#chat button {
+		width: 10%;
+		border: 0;
+	}
 </style>

@@ -15,8 +15,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.0.13",
     "node-sass": "^4.8.3",
     "sass-loader": "^6.0.7",

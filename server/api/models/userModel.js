@@ -1,7 +1,7 @@
 'use strict';
 const mongoose = require('mongoose'),
-      bcrypt = require('bcrypt'),
-      Schema = mongoose.Schema;
+      bcrypt = require('bcryptjs'),
+      Schema = mongoose.Schema,
       ObjectId = Schema.Types.ObjectId;
 
 //TODO add validators cf mongoose Validators
