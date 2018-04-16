@@ -55,7 +55,6 @@ export default {
 					object.position.x -= 0;
 					res(object);
 				});
-
 			});
 		}).then((obj) => {
 			this.mesh = obj;

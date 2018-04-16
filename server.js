@@ -1,11 +1,14 @@
 'use strict';
 
 let express = require('express');
+
+require('dotenv').config({ path: './server/config/' + process.env.NODE_ENV.trim() + '/.env' });
+console.log('Server environment : ' + process.env.NODE_ENV.trim());
+
 let app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
     jsonwebtoken = require("jsonwebtoken");
-
 
 //Load models
 let User = require('./server/api/models/userModel'),

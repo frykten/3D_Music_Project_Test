@@ -65,7 +65,6 @@
 			showChat() {
 				this.isHidden = !this.isHidden;
 				this.arrow = this.isHidden ? "chevron-left" : "chevron-right";
-				console.log(this.arrow);
 			}
 		}
 	}

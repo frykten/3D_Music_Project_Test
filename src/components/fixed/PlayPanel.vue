@@ -1,25 +1,33 @@
 <template lang="html">
 	<div>
 		<section class="play-panel" v-if="isLoaded">
-			<h2 class="play-title">Play</h2>
+            <play-panel-fx v-if="!isPlaying"></play-panel-fx>
+            
+            <section v-else>
+                <h2 class="play-title">Play</h2>
+                
+                <div>
+                    <select name="instr" id="instr" v-model="instr">
+                        <option value="pure_mini_sp">pure_mini_sp</option>
+                        <option value="SolarTech_Mini_SP">SolarTech_Mini_SP</option>
+                    </select>
+                </div>
 
-			<section id="instrument">
-				<button class="btn keys" @click="changeView()"><img class="btn-img" src="/static/logos/piano_keys.png" alt=""></button>
-				<button class="btn fret" @click="changeView()"><img class="btn-img" src="/static/logos/guitar.svg" alt=""></button>
-				<button class="btn keyboard" @click="changeView()"><icon name="keyboard"></icon></button>
-			</section>
-			
-			<section class="components">
-				<play-panel-play-keyboard></play-panel-play-keyboard>
-<!--				<play-panel-fx></play-panel-fx>-->
+                <section id="instrument">
+                    <button class="btn piano" @click="changePanel('piano')"><img class="btn-img" src="/static/logos/piano_keys.png" alt=""></button>
+                    <button class="btn fret" @click="changePanel('g-fret')"><img class="btn-img" src="/static/logos/guitar.svg" alt=""></button>
+                    <button class="btn keyboard" @click="changePanel('keyboard')"><icon name="keyboard"></icon></button>
+                </section>
+
+                <div id="play-style">
+                        <play-panel-play-keyboard v-if="panel == 'keyboard'" :child-instr="instr"></play-panel-play-keyboard>
+                </div>
 			</section>
 
 			<section id="modifiers">
-				<button class="btn play" @click="changeView()"><icon name="play"></icon></button>
-				<button class="btn fx" @click="changeView()"><p><b>FX</b></p></button>
+				<button class="btn play" @click="changeView('play')"><icon name="play"></icon></button>
+				<button class="btn fx" @click="changeView('FX')"><p><b>FX</b></p></button>
 			</section>
-
-			<button id="play">Play</button>
 		</section>
 
 		<section class="play-panel" v-else>
@@ -32,12 +40,16 @@
 
 <script>
 	import PlayPanelFx from './PlayPanelComponents/PlayPanelFx.vue'
-	import PlayPanelPlayKeyboard from './PlayPanelComponents/PlayPanelPlayKeyboard.vue'
+	import PlayPanelPlayKeyboard from './PlayPanelComponents/PlayPanelPlayKeyboardVirtual.vue'
 	
 	export default {
 		data() {
 			return {
 				isLoaded: true,
+                isPlaying: true,
+				panel: "keyboard",
+                
+                instr: null
 			}
 		},
 		components: {
@@ -45,9 +57,15 @@
 			PlayPanelPlayKeyboard,
 		},
 		methods: {
-			changeView() {
-				console.log("Change");
-			}
+			changeView(evt) {
+                this.isPlaying = evt === "play" ? true : false;
+			},
+            changePanel(evt) {
+				console.log(evt);
+                console.log(this.instr);
+                
+				this.panel = evt;
+            }
 		}
 	}
 </script>
