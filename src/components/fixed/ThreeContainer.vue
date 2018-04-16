@@ -51,8 +51,8 @@ export default {
 				var objLoader = new ThreeAddons.OBJLoader();
 				//objLoader.setMaterials(materials);
 				objLoader.load('./static/models/r2/r2-d2.obj', (object) => {
-					object.position.y -= 60;
-					object.position.x -= 4;
+					object.position.y -= 70;
+					object.position.x -= 0;
 					res(object);
 				});
 

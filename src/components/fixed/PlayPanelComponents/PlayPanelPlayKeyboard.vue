@@ -5,7 +5,7 @@
 		</ul>
 		
 		<ul id="right-keyboard" class="pad">
-			<li class="btn" v-for="key in keyboardR" :class="key.class">{{key.text}}</li>
+			<li class="btn" v-for="key in keyboardR" :class="key.class" @mousedown="activeBtn($event)" @mouseup="unActiveBtn($event)">{{key.text}}</li>
 		</ul>
 	</section>
 </template>
@@ -17,6 +17,7 @@
 				keyboardL: [
 					{
 						text: "²",
+						class: "weight-1h disabled",
 					},
 					{
 						text: "&",
@@ -50,17 +51,19 @@
 					},
 					{
 						text: ")",
+						class: "disabled",
 					},
 					{
 						text: "=",
+						class: "disabled",
 					},
 					{
 						text: "backarrow",
-						class: "weight-2",
+						class: "weight-1h disabled",
 					},
 					{
 						text: "tab",
-						class: "weight-2",
+						class: "weight-2 disabled",
 					},
 					{
 						text: "a",
@@ -94,16 +97,19 @@
 					},
 					{
 						text: "^",
+						class: "disabled",
 					},
 					{
 						text: "$",
+						class: "disabled",
 					},
 					{
 						text: "*",
+						class: "disabled",
 					},
 					{
 						text: "caps",
-						class: "weight-2",
+						class: "weight-2h disabled",
 					},
 					{
 						text: "q",
@@ -137,10 +143,11 @@
 					},
 					{
 						text: "ù",
+						class: "disabled",
 					},
 					{
 						text: "enter",
-						class: "weight-2",
+						class: "weight-1h disabled",
 					},
 					{
 						text: "shift",
@@ -162,6 +169,9 @@
 						text: "b",
 					},
 					{
+						text: "n",
+					},
+					{
 						text: ",",
 					},
 					{
@@ -175,7 +185,7 @@
 					},
 					{
 						text: "shift",
-						class: "weight-3",
+						class: "weight-2",
 					},
 					{
 						text: "ctrl",
@@ -183,11 +193,11 @@
 					},
 					{
 						text: "windows",
-						class: "weight-ab",
+						class: "weight-ab disabled",
 					},
 					{
 						text: "alt",
-						class: "weight-ab",
+						class: "weight-ab disabled",
 					},
 					{
 						text: "space",
@@ -195,15 +205,15 @@
 					},
 					{
 						text: "<",
-						class: "weight-ab",
+						class: "weight-ab disabled",
 					},
 					{
 						text: "alt gr",
-						class: "weight-ab",
+						class: "weight-ab disabled",
 					},
 					{
 						text: "fn",
-						class: "weight-ab",
+						class: "weight-ab disabled",
 					},
 					{
 						text: "ctrl",
@@ -213,6 +223,7 @@
 				keyboardR: [
 					{
 						text: "verr",
+						class: "disabled",
 					},
 					{
 						text: "/",
@@ -234,7 +245,7 @@
 					},
 					{
 						text: "+",
-						class: "weight-v",
+						class: "weight-v disabled",
 					},
 					{
 						text: "4",
@@ -247,7 +258,7 @@
 					},
 					{
 						text: "enter",
-						class: "weight-v",
+						class: "weight-v disabled",
 					},
 					{
 						text: "1",
@@ -259,20 +270,29 @@
 						text: "3",
 					},
 					{
-
+						class: "disabled",
 					},
 					{
 						text: "0",
-						class: "weight-2",
+						class: "weight-2 disabled",
 					},
 					{
 						text: ".",
+						class: "disabled",
 					},
 					{
-
+						class: "disabled",
 					},
 				]
 			}
+		},
+		methods: {
+			activeBtn(event) {
+				event.target.classList.add("active");
+			},
+			unActiveBtn(event) {
+				event.target.classList.remove("active");
+			},
 		}
 	}
 </script>
@@ -314,12 +334,24 @@
 		width: 1.4rem;
 	}
 	
+	.weight-1h {
+		width: 2.15rem;
+	}
+	
 	.weight-2 {
 		width: 2.9rem;
 	}
 	
+	.weight-2h {
+		width: 3.65rem;
+	}
+	
 	.weight-3 {
 		width: 4.4rem;
+	}
+	
+	.weight-3h {
+		width: 5.15rem;
 	}
 	
 	.weight-ab {
@@ -334,4 +366,11 @@
 /*		height: 2.9rem;*/
 	}
 	
+	.disabled {
+		opacity: .5;
+	}
+	
+	.active {
+		background: red;
+	}
 </style>
