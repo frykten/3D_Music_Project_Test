@@ -1,4 +1,8 @@
+var api = require("./PlayApi.js");
+
 export function getSound(instr, key) {
-    let sound = new Audio("/static/sounds/acoustic_guitar/" + instr + "/80_Bb_DblStopsGuitar_06_526.wav");
+    let path = "/static/sounds/acoustic_guitar/" + instr + "/" + key + ".wav";
+    console.log("/static/sounds/acoustic_guitar/" + instr + "/" + key);
+    let sound = api.getSound(path);
     return sound;
 }
