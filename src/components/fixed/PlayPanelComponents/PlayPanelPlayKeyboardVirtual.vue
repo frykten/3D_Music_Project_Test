@@ -1,7 +1,7 @@
 <template lang="html">
 	<section id="main">
 		<ul id="left-keyboard" class="pad">
-			<li class="btn" v-for="key in keyboardL" :class="key.class" :data-id="key.text" @mousedown="activeBtn($event)" @mouseup="unActiveBtn($event)">{{key.text}}</li>
+			<li class="btn" v-for="(key, id) in keyboardL" :class="key.class" :data-id="id" @mousedown="activeBtn($event)" @mouseup="unActiveBtn($event)">{{key.text}}</li>
 		</ul>
 		
 		<ul id="right-keyboard" class="pad">
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    var control = require("./PlayControllerKeyboardVirtual.js")
+    const control = require("./PlayControllerKeyboardVirtual.js")
     
 	export default {
 		data() {
@@ -294,12 +294,12 @@
                 event.target.classList.add("active");
                 
                 let instr = this.childInstr;
-                let key = event.target.dataset.id
+                let key = event.target.dataset.id;
                 
-                let sound = control.getSound(instr, '01');
+                let sound = control.getSound(instr, key);
                 sound.play();
                 
-                console.log();
+                console.log(key);
 			},
 			unActiveBtn(event) {
 				event.target.classList.remove("active");

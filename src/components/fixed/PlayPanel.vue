@@ -41,6 +41,8 @@
 <script>
 	import PlayPanelFx from './PlayPanelComponents/PlayPanelFx.vue'
 	import PlayPanelPlayKeyboard from './PlayPanelComponents/PlayPanelPlayKeyboardVirtual.vue'
+    
+    var controlKeyboard = require("./PlayPanelComponents/PlayControllerKeyboard.js")
 	
 	export default {
 		data() {
@@ -66,7 +68,16 @@
                 
 				this.panel = evt;
             }
-		}
+		},
+        created() {
+            window.addEventListener("keydown", function (event) {
+                if (event.key !== undefined)
+                    return;
+                
+                console.log(event.key);
+                controlKeyboard.getSound(this.instr, event.keycode);
+            }, true);
+        }
 	}
 </script>
 

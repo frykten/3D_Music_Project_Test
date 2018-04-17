@@ -2,7 +2,11 @@
 
 let express = require('express');
 
+/*
 require('dotenv').config({ path: './server/config/' + process.env.NODE_ENV.trim() + '/.env' });
+*/
+require('dotenv').config({ path: './server/config/local/.env' });
+
 console.log('Server environment : ' + process.env.NODE_ENV.trim());
 
 let app = express(),
@@ -48,7 +52,7 @@ app.use(function(req, res, next) {
 });
 
 // mongoose instance connection url connection
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 console.log('try the connection');
 if (process.env.NODE_ENV.trim() == 'local') {
     console.log('local connection');
