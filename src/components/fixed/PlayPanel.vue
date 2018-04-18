@@ -21,6 +21,8 @@
 
                 <div id="play-style">
                         <play-panel-play-keyboard v-if="panel == 'keyboard'" :child-instr="instr"></play-panel-play-keyboard>
+                        <play-panel-play-piano v-if="panel == 'piano'" :child-instr="instr"></play-panel-play-piano>
+                        <play-panel-play-guitar v-if="panel == 'g-fret'" :child-instr="instr"></play-panel-play-guitar>
                 </div>
 			</section>
 
@@ -41,6 +43,8 @@
 <script>
 	import PlayPanelFx from './PlayPanelComponents/PlayPanelFx.vue'
 	import PlayPanelPlayKeyboard from './PlayPanelComponents/PlayPanelPlayKeyboardVirtual.vue'
+	import PlayPanelPlayPiano from './PlayPanelComponents/PlayPanelPlayPiano.vue'
+	import PlayPanelPlayGuitar from './PlayPanelComponents/PlayPanelPlayGuitar.vue'
     
     var controlKeyboard = require("./PlayPanelComponents/PlayControllerKeyboard.js")
 	
@@ -57,6 +61,8 @@
 		components: {
 			PlayPanelFx,
 			PlayPanelPlayKeyboard,
+            PlayPanelPlayPiano,
+            PlayPanelPlayGuitar,
 		},
 		methods: {
 			changeView(evt) {

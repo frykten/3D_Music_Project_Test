@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    blank component
+    <p>Ici des FX</p>
   </div>
 </template>
 
