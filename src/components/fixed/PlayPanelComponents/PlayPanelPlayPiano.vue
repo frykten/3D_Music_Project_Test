@@ -75,7 +75,7 @@
                         special: "null"
                     },
                 ],
-                octave: 1,
+                octave: 2,
 			}
 		},
         props: ['childInstr'],
@@ -94,7 +94,13 @@
 			unActiveBtn(event) {
 				event.target.classList.remove("active");
 			},
-		}
+			calcOctave() {
+				this.octave = parseInt(this.octave);
+			}
+		},
+		watch: {
+			octave: 'calcOctave'
+		},
 	}
 </script>
 

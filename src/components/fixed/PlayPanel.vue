@@ -79,10 +79,10 @@
                     if (evt.key === undefined)
                         return;
 
-    //                console.log(evt.key);
+                    console.log(evt.keyCode);
                     let instr = that.instrument;
 
-                    let sound = controlKeyboard.getSound(instr, evt.keycode);
+                    let sound = controlKeyboard.getSound(instr, evt.keyCode);
                     sound.play();
                 }, true);
             }

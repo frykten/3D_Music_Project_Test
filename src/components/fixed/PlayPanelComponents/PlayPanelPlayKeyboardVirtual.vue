@@ -307,7 +307,7 @@
             colorBtns() {
                 var btns = document.querySelectorAll("li.btn");
                 // If guitar
-                if (false) {
+                if (true) {
                     for (let b of btns) {
                         switch (parseInt(b.dataset.id)) {
                             case 1:
@@ -513,6 +513,25 @@
                         }
                     }
                 }
+				else if ("drums") {
+					for (let b of btns) {
+                        switch (parseInt(b.dataset.id)) {
+							case 1:
+								b.classList.add("special");
+                                break;
+							default:
+								b.classList.add("disabled");
+						}
+					}
+				}
+				else {
+					for (let b of btns) {
+                        switch (parseInt(b.dataset.id)) {
+							default:
+								b.classList.add("disabled");
+						}
+					}
+				}
             }
 		},
         watch: {
@@ -590,14 +609,6 @@
 	.weight-v {
 /*		height: 2.9rem;*/
 	}
-	
-	.disabled {
-		opacity: .5;
-	}
-	
-	.active {
-		background: red;
-	}
     
     /* Guitar */
     .chord-6 {
@@ -616,13 +627,22 @@
 		background: hsl(135, 50%, 47%);
 	}
     .chord-1 {
-		background: hsl(85, 60%, 52%);
+		background: hsl(70, 60%, 45%);
 	}
     
-    .special {
+    
+	.special {
         background: hsl(200, 50%, 47%);
     }
     
+	.disabled {
+		opacity: .5;
+	}
+	
+	.active {
+		background: red;
+	}
+	
     .test {
         color: green;
         background: blue;
