@@ -73,5 +73,6 @@ app.use(function(req, res) {
     res.status(404).send({ url: req.originalUrl + ' is not implemented' })
 });
 
-app.listen(port);
-console.log('Guitars : RESTful API server started on: ' + port);
+app.listen(port, () => {
+    console.log('Guitars : RESTful API server started on: ' + port);	
+});

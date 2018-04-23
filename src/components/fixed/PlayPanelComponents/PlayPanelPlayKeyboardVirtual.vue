@@ -5,7 +5,7 @@
 		</ul>
 		
 		<ul id="right-keyboard" class="pad">
-			<li class="btn" v-for="key in keyboardR" :class="key.class" @mousedown="activeBtn($event)" @mouseup="unActiveBtn($event)">{{key.text}}</li>
+			<li class="btn" v-for="(key, id) in keyboardR" :class="key.class" :data-id="id + 61" @mousedown="activeBtn($event)" @mouseup="unActiveBtn($event)">{{key.text}}</li>
 		</ul>
 	</section>
 </template>
@@ -19,7 +19,7 @@
 				keyboardL: [
 					{
 						text: "²",
-						class: "weight-1h disabled",
+						class: "weight-1h ",
 					},
 					{
 						text: "&",
@@ -53,19 +53,19 @@
 					},
 					{
 						text: ")",
-						class: "disabled",
+						class: "",
 					},
 					{
 						text: "=",
-						class: "disabled",
+						class: "",
 					},
 					{
 						text: "backarrow",
-						class: "weight-1h disabled",
+						class: "weight-1h ",
 					},
 					{
 						text: "tab",
-						class: "weight-2 disabled",
+						class: "weight-2 ",
 					},
 					{
 						text: "a",
@@ -99,19 +99,19 @@
 					},
 					{
 						text: "^",
-						class: "disabled",
+						class: "",
 					},
 					{
 						text: "$",
-						class: "disabled",
+						class: "",
 					},
 					{
 						text: "*",
-						class: "disabled",
+						class: "",
 					},
 					{
 						text: "caps",
-						class: "weight-2h disabled",
+						class: "weight-2h ",
 					},
 					{
 						text: "q",
@@ -145,11 +145,11 @@
 					},
 					{
 						text: "ù",
-						class: "disabled",
+						class: "",
 					},
 					{
 						text: "enter",
-						class: "weight-1h disabled",
+						class: "weight-1h ",
 					},
 					{
 						text: "shift",
@@ -195,7 +195,7 @@
 					},
 					{
 						text: "windows",
-						class: "weight-ab disabled",
+						class: "weight-ab ",
 					},
 					{
 						text: "alt",
@@ -207,15 +207,15 @@
 					},
 					{
 						text: "<",
-						class: "weight-ab disabled",
+						class: "weight-ab ",
 					},
 					{
 						text: "alt gr",
-						class: "weight-ab disabled",
+						class: "weight-ab ",
 					},
 					{
 						text: "fn",
-						class: "weight-ab disabled",
+						class: "weight-ab ",
 					},
 					{
 						text: "ctrl",
@@ -225,7 +225,7 @@
 				keyboardR: [
 					{
 						text: "verr",
-						class: "disabled",
+						class: "",
 					},
 					{
 						text: "/",
@@ -247,7 +247,7 @@
 					},
 					{
 						text: "+",
-						class: "weight-v disabled",
+						class: "weight-v ",
 					},
 					{
 						text: "4",
@@ -260,7 +260,7 @@
 					},
 					{
 						text: "enter",
-						class: "weight-v disabled",
+						class: "weight-v ",
 					},
 					{
 						text: "1",
@@ -272,18 +272,18 @@
 						text: "3",
 					},
 					{
-						class: "disabled",
+						class: "",
 					},
 					{
 						text: "0",
-						class: "weight-2 disabled",
+						class: "weight-2 ",
 					},
 					{
 						text: ".",
-						class: "disabled",
+						class: "",
 					},
 					{
-						class: "disabled",
+						class: "",
 					},
 				],
 			}
@@ -304,7 +304,221 @@
 			unActiveBtn(event) {
 				event.target.classList.remove("active");
 			},
-		}
+            colorBtns() {
+                var btns = document.querySelectorAll("li.btn");
+                // If guitar
+                if (false) {
+                    for (let b of btns) {
+                        switch (parseInt(b.dataset.id)) {
+                            case 1:
+                            case 2:
+                            case 15:
+                            case 16:
+                            case 29:
+                            case 30:
+                            case 42:
+                            case 43:
+                                b.classList.add("chord-6");
+                                break;
+                            case 3:
+                            case 4:
+                            case 17:
+                            case 18:
+                            case 31:
+                            case 32:
+                            case 44:
+                            case 45:
+                                b.classList.add("chord-5");
+                                break;
+                            case 5:
+                            case 6:
+                            case 19:
+                            case 20:
+                            case 33:
+                            case 34:
+                            case 46:
+                            case 47:
+                                b.classList.add("chord-4");
+                                break;
+                            case 7:
+                            case 8:
+                            case 21:
+                            case 22:
+                            case 35:
+                            case 36:
+                            case 48:
+                            case 49:
+                                b.classList.add("chord-3");
+                                break;
+                            case 9:
+                            case 10:
+                            case 23:
+                            case 24:
+                            case 37:
+                            case 38:
+                            case 50:
+                            case 51:
+                                b.classList.add("chord-2");
+                                break;
+                            case 11:
+                            case 12:
+                            case 25:
+                            case 26:
+                            case 27:
+                            case 39:
+                                b.classList.add("chord-1");
+                                break;
+                            case 41:
+                            case 52:
+                            case 53:
+                            case 55:
+                            case 60:
+                                b.classList.add("special");
+                                break;
+                            default:
+                                b.classList.add("disabled");
+                        }
+                    }
+                }
+                else if ("bass") {
+                    for (let b of btns) {
+                        switch (parseInt(b.dataset.id)) {
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 7:
+                            case 8:
+                            case 9:
+                            case 10:
+                            case 62:
+                            case 63:
+                            case 64:
+                                b.classList.add("chord-6");
+                                break;
+                            case 15:
+                            case 16:
+                            case 17:
+                            case 18:
+                            case 19:
+                            case 20:
+                            case 21:
+                            case 22:
+                            case 23:
+                            case 24:
+                            case 65:
+                            case 66:
+                            case 67:
+                                b.classList.add("chord-5");
+                                break;
+                            case 29:
+                            case 30:
+                            case 31:
+                            case 32:
+                            case 33:
+                            case 34:
+                            case 35:
+                            case 36:
+                            case 37:
+                            case 38:
+                            case 69:
+                            case 70:
+                            case 71:
+                                b.classList.add("chord-4");
+                                break;
+                            case 42:
+                            case 43:
+                            case 44:
+                            case 45:
+                            case 46:
+                            case 47:
+                            case 48:
+                            case 49:
+                            case 50:
+                            case 51:
+                            case 73:
+                            case 74:
+                            case 75:
+                                b.classList.add("chord-3");
+                                break;
+                            case 41:
+                            case 52:
+                            case 53:
+                            case 55:
+                            case 60:
+                                b.classList.add("special");
+                                break;
+                            default:
+                                b.classList.add("disabled");
+                        }
+                    }
+                }
+                else if ("piano") {
+                    for (let b of btns) {
+                        switch (parseInt(b.dataset.id)) {
+                            case 1:
+                            case 15:
+                            case 2:
+                            case 16:
+                            case 3:
+                            case 17:
+                                b.classList.add("chord-6");
+                                break;
+                            case 18:
+                            case 5:
+                            case 19:
+                            case 6:
+                            case 20:
+                            case 21:
+                            case 8:
+                            case 22:
+                            case 9:
+                            case 23:
+                            case 10:
+                            case 24:
+                                b.classList.add("chord-5");
+                                break;
+                            case 42:
+                            case 30:
+                            case 43:
+                            case 31:
+                            case 44:
+                            case 45:
+                            case 33:
+                            case 46:
+                            case 34:
+                            case 47:
+                            case 35:
+                            case 48:
+                                b.classList.add("chord-4");
+                                break;
+                            case 49:
+                            case 37:
+                            case 50:
+                            case 38:
+                            case 51:
+                                b.classList.add("chord-3");
+                                break;
+                            case 41:
+                            case 52:
+                            case 53:
+                            case 55:
+                            case 60:
+                                b.classList.add("special");
+                                break;
+                            default:
+                                b.classList.add("disabled");
+                        }
+                    }
+                }
+            }
+		},
+        watch: {
+            childInstr: 'colorBtns'
+        },
+        mounted() { this.colorBtns() },
 	}
 </script>
 
@@ -384,6 +598,30 @@
 	.active {
 		background: red;
 	}
+    
+    /* Guitar */
+    .chord-6 {
+		background: hsl(15, 64%, 55%);
+	}
+    .chord-5 {
+		background: hsl(355, 50%, 47%);
+	}
+    .chord-4 {
+		background: hsl(335, 50%, 62%);
+	}
+    .chord-3 {
+		background: hsl(315, 50%, 47%);
+	}
+    .chord-2 {
+		background: hsl(135, 50%, 47%);
+	}
+    .chord-1 {
+		background: hsl(85, 60%, 52%);
+	}
+    
+    .special {
+        background: hsl(200, 50%, 47%);
+    }
     
     .test {
         color: green;

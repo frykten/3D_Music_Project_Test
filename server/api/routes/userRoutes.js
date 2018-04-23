@@ -2,6 +2,8 @@
 module.exports = (app) => {
     let userApi = require('../controllers/userController.js');
 
+    app.route('/').get((res, req) => { res.status(200).json({ message: "connected" }); });
+
     app.route('/users')
         .get(userApi.getUsers)
         .post(userApi.postUser);

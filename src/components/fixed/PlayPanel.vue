@@ -7,22 +7,22 @@
                 <h2 class="play-title">Play</h2>
                 
                 <div>
-                    <select name="instr" id="instr" v-model="instr">
+                    <select name="instr" id="instr" v-model="instrument">
                         <option value="pure_mini_sp">pure_mini_sp</option>
                         <option value="SolarTech_Mini_SP">SolarTech_Mini_SP</option>
                     </select>
                 </div>
 
-                <section id="instrument">
+                <section id="readers">
                     <button class="btn piano" @click="changePanel('piano')"><img class="btn-img" src="/static/logos/piano_keys.png" alt=""></button>
                     <button class="btn fret" @click="changePanel('g-fret')"><img class="btn-img" src="/static/logos/guitar.svg" alt=""></button>
                     <button class="btn keyboard" @click="changePanel('keyboard')"><icon name="keyboard"></icon></button>
                 </section>
 
                 <div id="play-style">
-                        <play-panel-play-keyboard v-if="panel == 'keyboard'" :child-instr="instr"></play-panel-play-keyboard>
-                        <play-panel-play-piano v-if="panel == 'piano'" :child-instr="instr"></play-panel-play-piano>
-                        <play-panel-play-guitar v-if="panel == 'g-fret'" :child-instr="instr"></play-panel-play-guitar>
+                        <play-panel-play-keyboard v-if="panel == 'keyboard'" :child-instr="instrument"></play-panel-play-keyboard>
+                        <play-panel-play-piano v-if="panel == 'piano'" :child-instr="instrument"></play-panel-play-piano>
+                        <play-panel-play-guitar v-if="panel == 'g-fret'" :child-instr="instrument"></play-panel-play-guitar>
                 </div>
 			</section>
 
@@ -55,7 +55,7 @@
                 isPlaying: true,
 				panel: "keyboard",
                 
-                instr: null
+                instrument: null
 			}
 		},
 		components: {
@@ -70,19 +70,25 @@
 			},
             changePanel(evt) {
 				console.log(evt);
-                console.log(this.instr);
+                console.log(this.instrument);
                 
 				this.panel = evt;
+            },
+            keytyping(that) {
+                window.addEventListener("keydown", function (evt) {
+                    if (evt.key === undefined)
+                        return;
+
+    //                console.log(evt.key);
+                    let instr = that.instrument;
+
+                    let sound = controlKeyboard.getSound(instr, evt.keycode);
+                    sound.play();
+                }, true);
             }
 		},
         created() {
-            window.addEventListener("keydown", function (event) {
-                if (event.key !== undefined)
-                    return;
-                
-                console.log(event.key);
-                controlKeyboard.getSound(this.instr, event.keycode);
-            }, true);
+            this.keytyping(this);
         }
 	}
 </script>
@@ -114,7 +120,7 @@
 		width: 1.5rem;
 	}
 	
-	#instrument {
+	#readers {
 		display: flex;
 		flex-wrap: wrap;
 		left: 16px;

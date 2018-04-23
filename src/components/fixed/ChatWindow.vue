@@ -12,7 +12,7 @@
 			</header>
 
 			<div id="messages">
-				<p>Smurf</p>
+				<div class="msg" v-for="m in messages"><p class="msg-user">{{m.user}}: </p><p class="msg-text">{{m.txt}}</p><p class="msg-time">{{m.time}}</p></div>
 			</div>
 
 			<div id="footer">
@@ -28,7 +28,19 @@
 		data() {
 			return {
 				isHidden: true,
-				arrow: "chevron-right"
+				arrow: "chevron-right",
+                messages: [
+                    {
+                        user: "fry",
+                        txt: "Smurfies!",
+                        time: "16:25"
+                    },
+                    {
+                        user: "myn",
+                        txt: "Squirrels!",
+                        time: "16:26"
+                    },
+                ]
 			}
 		},
 		methods: {
@@ -84,6 +96,20 @@
 		width: 90%;
 		height: inherit;
 	}
+    
+    .msg {
+        display: grid;
+        grid-template-columns: 50px 1fr 35px;
+        line-height: 1rem;
+    }
+
+    .msg-user {
+        font-size: 1rem;
+    }
+    
+    .msg-text, .msg-time {
+        font-size: .75rem;
+    }
 
 	#footer {
 		display: flex;
