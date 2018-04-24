@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-
+	
+	<view-button></view-button>
+   
     <chat-window></chat-window>
 
     <three-container></three-container>
@@ -14,6 +16,7 @@
 
 <script>
 import NavBar from './components/fixed/NavBar.vue'
+import ViewButton from './components/fixed/ViewButton.vue'
 import ChatWindow from './components/fixed/ChatWindow.vue'
 import FooterBar from './components/fixed/Footer.vue'
 
@@ -23,6 +26,7 @@ export default {
   name: 'App',
   components: {
     NavBar,
+	ViewButton,
     ChatWindow,
     FooterBar,
     ThreeContainer,

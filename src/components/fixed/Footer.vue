@@ -19,6 +19,6 @@ export default {
 		justify-content: center;
 		align-items: center;
 		background-color: rgb(84, 84, 84);
-		box-shadow: 10px -10px 10px rgba(0,0,0,0.4), 10px -10px 16px rgba(0,0,0,0.4);
+		box-shadow: 2px -10px 10px rgba(10,20,20,0.4), 2px -10px 16px rgba(10,15,15,0.4);
 	}
 </style>

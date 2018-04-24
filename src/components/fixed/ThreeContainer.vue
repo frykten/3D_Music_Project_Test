@@ -30,6 +30,7 @@ export default {
         this.camera.position.z = 200;
 
         this.scene = new Three.Scene();
+		this.scene.background = new Three.Color( 0x211d1d );
 
         this.renderer = new Three.WebGLRenderer({antialias: true});
 		this.controls = new ThreeAddons.OrbitControls(this.camera, this.renderer.domElement);

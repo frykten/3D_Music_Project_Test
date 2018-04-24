@@ -1,10 +1,12 @@
 <template lang="html">
 	<nav id="nav-bar">
 		<router-link to="/">
-			<div class="logo parts"><img id="logo-img" src="/static/logos/jfg_logo.png" alt="">Great Fire's Jam Session</div>
+			<div class="logo parts">
+				<img id="logo-img" src="/static/logos/jfg_logo.png" alt="">
+				<p>Great Fire's Jam Session</p>
+			</div>
 		</router-link>
 
-		<router-link to="/play">
 			<div class="search parts">
 				<div id="search-bar">
 					<input type="text" id="search-input">
@@ -14,14 +16,28 @@
 					<icon name="search" id="search-icon"></icon>
 				</button>
 			</div>
-		</router-link>
 
-		<router-link to="/view">
-			<div class="menus parts">
-				<p>Menu</p>
-				<icon name="bars"></icon>
-				<icon name="circle"></icon>
-				<icon name="circle" scale="2"></icon>
+		<router-link to="/">
+			<div id="menu" class="menus parts">
+				<div class="parts mini-parts">
+					<icon name="circle"></icon>
+					<p>Contact</p>
+				</div>
+				<div class="parts mini-parts">
+					<icon name="circle"></icon>
+					<p>Contrib</p>
+				</div>
+				<div class="parts mini-parts">
+					<icon name="circle"></icon>
+					<p>News</p>
+				</div>
+				<div class="parts mini-parts">
+					<icon name="circle"></icon>
+					<div class="mini-parts-row">
+						<p>You</p>
+						<icon name="caret-down"></icon>
+					</div>
+				</div>
 			</div>
 		</router-link>
 	</nav>
@@ -35,18 +51,18 @@
 <style lang="scss" scoped>
 	#nav-bar {
 		align-items: center;
-		background: linear-gradient(0deg, darkslategray, #172e2e 75%, black);
-		box-shadow: 10px 0px 10px rgba(0,0,0,0.4), 0 10px 16px rgba(0,0,0,0.4);
+		background: linear-gradient(0deg, darkslategray, #172e2e 75%, #1c1c1c);
+		box-shadow: 5px 0px 10px rgba(10,20,20,0.4), 0 10px 16px rgba(10,15,15,0.4);
 		display: flex;
 		height: 9vh;
-		justify-content: space-between;
+/*		justify-content: space-between;*/
 		padding: 0.5rem;
 		position: fixed;
 		width: 100vw;
 		z-index: 100;
 	}
 	
-	a {
+	a, p {
 		color: white;
 		text-decoration: none;
 	}
@@ -54,7 +70,19 @@
 	.parts {
 		align-items: center;
 		display: flex;
-		justify-content: space-around;
+		justify-content: center;
+		height: 100%;
+	}
+	
+	.mini-parts {
+		flex-direction: column;
+		font-size: .8rem;
+	}
+	
+	.mini-parts-row {
+		align-items: center;
+		display: flex;
+		justify-content: center;
 	}
 	
 	.logo {
@@ -68,6 +96,7 @@
 		-ms-interpolation-mode: nearest-neighbor;
 		image-rendering: pixelated;
 		width: 2rem;
+		margin-right: .5rem;
 	}
 	
 	#search-bar {
@@ -77,6 +106,7 @@
 		display: flex;
 		height: 1.6rem;
 		justify-content: center;
+		margin-left: 1rem;
 		width: 15rem;
 	}
 	
@@ -103,7 +133,13 @@
 		width: 1.6rem;
 	}
 	
-	.menus * {
-		margin: .2rem;
+	#menu {
+		border-left: solid 1px lightgray;
+		padding-left: .5rem;
+		margin-left: auto;
+	}
+	
+	.menus > .parts {
+		margin: .2rem .5rem;
 	}
 </style>
