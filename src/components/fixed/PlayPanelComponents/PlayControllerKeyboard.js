@@ -1,8 +1,12 @@
 var api = require("./PlayApi.js");
 
 export function getSound(instr, key) {
+    let name;
+    
 	if (!checkKey(instr, key))
 		return;
+    else
+        name = checkKey(instr, key);
     // temporary
     key = "01";
     
@@ -15,7 +19,7 @@ export function getSound(instr, key) {
 //    if (instr.type === "drumkit")
 //        console.log();
     
-    let path = "/static/sounds/acoustic_guitar/" + instr + "/" + key + ".wav";
+    let path = "/static/sounds/acoustic_guitar/" + instr + "/" + name + ".wav";
 //    console.log(path);
     let sound = api.getSound(path);
     return sound;
@@ -53,8 +57,40 @@ function checkKey(i, k) {
 			case 104:
 			case 105:
 				return false;
+            case 49:
+                return "6_00";
+            case 50:
+                return "6_01";
+            case 65:
+                return "6_02";
+            case 90:
+                return "6_03";
+            case 81:
+                return "6_04";
+            case 83:
+                return "6_05";
+            case 87:
+                return "6_06";
+            case 88:
+                return "6_07";
+            case 51:
+                return "5_00";
+            case 52:
+                return "5_01";
+            case 69:
+                return "5_02";
+            case 82:
+                return "5_03";
+            case 68:
+                return "5_04";
+            case 70:
+                return "5_05";
+            case 67:
+                return "5_06";
+            case 86:
+                return "5_07";
 			default:
-				return true;
+				return false;
 		}
 	}
 	else if (i == "bass") {

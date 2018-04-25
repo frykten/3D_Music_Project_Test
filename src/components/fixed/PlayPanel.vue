@@ -10,6 +10,7 @@
                     <select name="instr" id="instr" v-model="instrument">
                         <option value="pure_mini_sp">pure_mini_sp</option>
                         <option value="SolarTech_Mini_SP">SolarTech_Mini_SP</option>
+                        <option value="stratocaster">stratocaster</option>
                     </select>
                 </div>
 
