@@ -21,7 +21,7 @@ let User = require('./server/api/models/userModel'),
 // interceptor : verify the authorization   
 app.use(function(req, res, next) {
      // Website you wish to allow to connect
-     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
 
      // Request methods you wish to allow
      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');

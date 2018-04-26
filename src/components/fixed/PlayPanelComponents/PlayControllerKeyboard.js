@@ -89,6 +89,66 @@ function checkKey(i, k) {
                 return "5_06";
             case 86:
                 return "5_07";
+			case 53:
+                return "4_00";
+            case 54:
+                return "4_01";
+            case 84:
+                return "4_02";
+            case 89:
+                return "4_03";
+            case 71:
+                return "4_04";
+            case 72:
+                return "4_05";
+            case 66:
+                return "4_06";
+            case 78:
+                return "4_07";
+			case 55:
+                return "3_00";
+            case 56:
+                return "3_01";
+            case 85:
+                return "3_02";
+            case 73:
+                return "3_03";
+            case 74:
+                return "3_04";
+            case 75:
+                return "3_05";
+            case 188:
+                return "3_06";
+            case 190:
+                return "3_07";
+			case 57:
+                return "2_00";
+            case 48:
+                return "2_01";
+            case 79:
+                return "2_02";
+            case 80:
+                return "2_03";
+            case 76:
+                return "2_04";
+            case 77:
+                return "2_05";
+            case 191:
+                return "2_06";
+            case 223:
+                return "2_07";
+			case 219:
+                return "1_00";
+            case 187:
+                return "1_01";
+            case 221:
+                return "1_02";
+            case 186:
+                return "1_03";
+            case 220:
+                return "1_04";
+			case 192:
+                return "1_05";
 			default:
 				return false;
 		}

@@ -14,10 +14,11 @@
 			<div id="messages">
 				<div class="msg" v-for="m in messages"><p class="msg-user">{{m.user}}: </p><p class="msg-text">{{m.txt}}</p><p class="msg-time">{{m.time}}</p></div>
 			</div>
-
+<p v-if="isConnected">We're connected to the server!</p>
+<p>Message from server: "{{socketMessage}}"</p>
 			<div id="footer">
 				<input type="text" placeholder="Message here">
-				<button><icon name='check'></icon></button>
+				<button @click="pingServer()"><icon name='check'></icon></button>
 			</div>
 	    </section>
 	</section>
@@ -40,15 +41,36 @@
                         txt: "Squirrels!",
                         time: "16:26"
                     },
-                ]
+                ],
+				isConnected: false,
+				socketMessage: '',
 			}
 		},
 		methods: {
 			showChat() {
 				this.isHidden = !this.isHidden;
 				this.arrow = this.isHidden ? "chevron-right" : "chevron-left";
+			},
+			pingServer() {
+			  // Send the "pingServer" event to the server.
+			  this.$socket.emit('pingServer', 'PING!')
 			}
-		}
+		},
+		sockets: {
+			connect() {
+			  // Fired when the socket connects.
+			  this.isConnected = true;
+			},
+
+			disconnect() {
+			  this.isConnected = false;
+			},
+
+			// Fired when the server sends something on the "messageChannel" channel.
+			messageChannel(data) {
+			  this.socketMessage = data
+			}
+		},
 	}
 </script>
 

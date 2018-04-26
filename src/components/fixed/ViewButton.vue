@@ -12,16 +12,6 @@
 
 <script>
 export default {
-	methods: {
-		console() {
-			console.log(this);
-		}
-	},
-	mounted() {
-		console.log(this.$route.path);
-		console.log(this);
-//		this.console();
-	}
 }
 </script>
 
