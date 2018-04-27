@@ -1,7 +1,19 @@
 <template lang="html">
 	<section id="main">
 		<ul id="left-keyboard" class="pad">
-			<li class="btn" v-for="(key, id) in keyboardL" :class="key.class" :data-id="id" @mousedown="activeBtn($event)" @mouseup="unActiveBtn($event)">{{key.text}}</li>
+			<li class="btn" v-for="(key, id) in keyboardL" :class="key.class" :data-id="id" @mousedown="activeBtn($event)" @mouseup="unActiveBtn($event)"><p class="btn-text">{{key.text}}</p><span class="btn-key">{{key.spanKey}}</span></li>
+		</ul>
+		
+		<ul id="legend" class="pad">
+            <p>Legend</p>
+		    <li class="btn chord-6">6th chord</li>
+		    <li class="btn chord-5">5th chord</li>
+		    <li class="btn chord-4">4th chord</li>
+		    <li class="btn chord-3">3rd chord</li>
+		    <li class="btn chord-2">2nd chord</li>
+		    <li class="btn chord-1">1st chord</li>
+		    <li class="btn special">special key</li>
+		    <li class="btn disabled">not working</li>
 		</ul>
 		
 		<ul id="right-keyboard" class="pad">
@@ -18,272 +30,318 @@
 			return {
 				keyboardL: [
 					{
-						text: "²",
+						text: "²", spanKey: "",
 						class: "weight-1h ",
 					},
 					{
-						text: "&",
+						text: "&", spanKey: "",
+                        spanKeyGuitar: "E",
 					},
 					{
-						text: "é",
+						text: "é", spanKey: "",
+                        spanKeyGuitar: "Ab",
 					},
 					{
-						text: '"',
+						text: '"', spanKey: "",
+                        spanKeyGuitar: "A",
 					},
 					{
-						text: "'",
+						text: "'", spanKey: "",
+                        spanKeyGuitar: "Db",
 					},
 					{
-						text: "(",
+						text: "(", spanKey: "",
+                        spanKeyGuitar: "D",
 					},
 					{
-						text: "-",
+						text: "-", spanKey: "",
+                        spanKeyGuitar: "F",
 					},
 					{
-						text: "è",
+						text: "è", spanKey: "",
+                        spanKeyGuitar: "G",
 					},
 					{
-						text: "_",
+						text: "_", spanKey: "",
+                        spanKeyGuitar: "B",
 					},
 					{
-						text: "ç",
+						text: "ç", spanKey: "",
+                        spanKeyGuitar: "B",
 					},
 					{
-						text: "à",
+						text: "à", spanKey: "",
+                        spanKeyGuitar: "Eb",
 					},
 					{
-						text: ")",
+						text: ")", spanKey: "",
+                        spanKeyGuitar: "E",
 						class: "",
 					},
 					{
-						text: "=",
+						text: "=", spanKey: "",
+                        spanKeyGuitar: "G",
 						class: "",
 					},
 					{
-						text: "backarrow",
+						text: "backarrow", spanKey: "",
 						class: "weight-1h ",
 					},
 					{
-						text: "tab",
+						text: "tab", spanKey: "",
 						class: "weight-2 ",
 					},
 					{
-						text: "a",
+						text: "a", spanKey: "",
+                        spanKeyGuitar: "Fb",
 					},
 					{
-						text: "z",
+						text: "z", spanKey: "",
+                        spanKeyGuitar: "A",
 					},
 					{
-						text: "e",
+						text: "e", spanKey: "",
+                        spanKeyGuitar: "Bb",
 					},
 					{
-						text: "r",
+						text: "r", spanKey: "",
+                        spanKeyGuitar: "D",
 					},
 					{
-						text: "t",
+						text: "t", spanKey: "",
+                        spanKeyGuitar: "Eb",
 					},
 					{
-						text: "y",
+						text: "y", spanKey: "",
+                        spanKeyGuitar: "G",
 					},
 					{
-						text: "u",
+						text: "u", spanKey: "",
+                        spanKeyGuitar: "Ab",
 					},
 					{
-						text: "i",
+						text: "i", spanKey: "",
+                        spanKeyGuitar: "C",
 					},
 					{
-						text: "o",
+						text: "o", spanKey: "",
+                        spanKeyGuitar: "C",
 					},
 					{
-						text: "p",
+						text: "p", spanKey: "",
+                        spanKeyGuitar: "E",
 					},
 					{
-						text: "^",
+						text: "^", spanKey: "",
+                        spanKeyGuitar: "Fb",
 						class: "",
 					},
 					{
-						text: "$",
+						text: "$", spanKey: "",
+                        spanKeyGuitar: "Ab",
 						class: "",
 					},
 					{
-						text: "*",
+						text: "*", spanKey: "",
+                        spanKeyGuitar: "A",
 						class: "",
 					},
 					{
-						text: "caps",
+						text: "caps", spanKey: "",
 						class: "weight-2h ",
 					},
 					{
-						text: "q",
+						text: "q", spanKey: "",
+                        spanKeyGuitar: "F",
 					},
 					{
-						text: "s",
+						text: "s", spanKey: "",
+                        spanKeyGuitar: "Bb",
 					},
 					{
-						text: "d",
+						text: "d", spanKey: "",
+                        spanKeyGuitar: "B",
 					},
 					{
-						text: "f",
+						text: "f", spanKey: "",
+                        spanKeyGuitar: "Eb",
 					},
 					{
-						text: "g",
+						text: "g", spanKey: "",
+                        spanKeyGuitar: "E",
 					},
 					{
-						text: "h",
+						text: "h", spanKey: "",
+                        spanKeyGuitar: "Ab",
 					},
 					{
-						text: "j",
+						text: "j", spanKey: "",
+                        spanKeyGuitar: "A",
 					},
 					{
-						text: "k",
+						text: "k", spanKey: "",
+                        spanKeyGuitar: "Db",
 					},
 					{
-						text: "l",
+						text: "l", spanKey: "",
+                        spanKeyGuitar: "Db",
 					},
 					{
-						text: "m",
+						text: "m", spanKey: "",
+                        spanKeyGuitar: "Fb",
 					},
 					{
-						text: "ù",
+						text: "ù", spanKey: "",
+                        spanKeyGuitar: "F",
 						class: "",
 					},
 					{
-						text: "enter",
+						text: "enter", spanKey: "",
 						class: "weight-1h ",
 					},
 					{
-						text: "shift",
+						text: "shift", spanKey: "",
 						class: "weight-3",
 					},
 					{
-						text: "w",
+						text: "w", spanKey: "",
+                        spanKeyGuitar: "G",
 					},
 					{
-						text: "x",
+						text: "x", spanKey: "",
+                        spanKeyGuitar: "B",
 					},
 					{
-						text: "c",
+						text: "c", spanKey: "",
+                        spanKeyGuitar: "C",
 					},
 					{
-						text: "v",
+						text: "v", spanKey: "",
+                        spanKeyGuitar: "E",
 					},
 					{
-						text: "b",
+						text: "b", spanKey: "",
+                        spanKeyGuitar: "Fb",
 					},
 					{
-						text: "n",
+						text: "n", spanKey: "",
+                        spanKeyGuitar: "A",
 					},
 					{
-						text: ",",
+						text: ",", spanKey: "",
+                        spanKeyGuitar: "Bb",
 					},
 					{
-						text: ";",
+						text: ";", spanKey: "",
+                        spanKeyGuitar: "D",
 					},
 					{
-						text: ":",
+						text: ":", spanKey: "",
+                        spanKeyGuitar: "D",
 					},
 					{
-						text: "!",
+						text: "!", spanKey: "",
+                        spanKeyGuitar: "F",
 					},
 					{
-						text: "shift",
+						text: "shift", spanKey: "",
 						class: "weight-2",
 					},
 					{
-						text: "ctrl",
+						text: "ctrl", spanKey: "",
 						class: "weight-ab",
 					},
 					{
-						text: "windows",
+						text: "windows", spanKey: "",
 						class: "weight-ab ",
 					},
 					{
-						text: "alt",
+						text: "alt", spanKey: "",
 						class: "weight-ab",
 					},
 					{
-						text: "space",
+						text: "space", spanKey: "",
 						class: "weight-space",
 					},
 					{
-						text: "<",
+						text: "<", spanKey: "",
 						class: "weight-ab ",
 					},
 					{
-						text: "alt gr",
+						text: "alt gr", spanKey: "",
 						class: "weight-ab ",
 					},
 					{
-						text: "fn",
+						text: "fn", spanKey: "",
 						class: "weight-ab ",
 					},
 					{
-						text: "ctrl",
+						text: "ctrl", spanKey: "",
 						class: "weight-ab",
 					},
 				],
 				keyboardR: [
 					{
-						text: "verr",
+						text: "verr", spanKey: "",
 						class: "",
 					},
 					{
-						text: "/",
+						text: "/", spanKey: "",
 					},
 					{
-						text: "*",
+						text: "*", spanKey: "",
 					},
 					{
-						text: "-",
+						text: "-", spanKey: "",
 					},
 					{
-						text: "7",
+						text: "7", spanKey: "",
 					},
 					{
-						text: "8",
+						text: "8", spanKey: "",
 					},
 					{
-						text: "9",
+						text: "9", spanKey: "",
 					},
 					{
-						text: "+",
+						text: "+", spanKey: "",
 						class: "weight-v ",
 					},
 					{
-						text: "4",
+						text: "4", spanKey: "",
 					},
 					{
-						text: "5",
+						text: "5", spanKey: "",
 					},
 					{
-						text: "6",
+						text: "6", spanKey: "",
 					},
 					{
-						text: "enter",
+						text: "enter", spanKey: "",
 						class: "weight-v ",
 					},
 					{
-						text: "1",
+						text: "1", spanKey: "",
 					},
 					{
-						text: "2",
+						text: "2", spanKey: "",
 					},
 					{
-						text: "3",
+						text: "3", spanKey: "",
 					},
 					{
-						class: "",
+						class: "", spanKey: "",
 					},
 					{
-						text: "0",
+						text: "0", spanKey: "",
 						class: "weight-2 ",
 					},
 					{
-						text: ".",
+						text: ".", spanKey: "",
 						class: "",
 					},
 					{
-						class: "",
+						class: "", spanKey: "",
 					},
 				],
 			}
@@ -291,10 +349,11 @@
         props: ['childInstr'],
 		methods: {
 			activeBtn(event) {
-                event.target.classList.add("active");
+                let target = event.target.closest("li");
+                target.classList.add("active");
                 
                 let instr = this.childInstr;
-                let key = event.target.dataset.id;
+                let key = target.dataset.id;
                 
                 let sound = control.getSound(instr, key);
                 sound.play();
@@ -302,70 +361,81 @@
                 console.log(key);
 			},
 			unActiveBtn(event) {
-				event.target.classList.remove("active");
+				event.target.closest("li").classList.remove("active");
 			},
             colorBtns() {
                 var btns = document.querySelectorAll("li.btn");
+                
+                // Place icons
+                btns[13].innerHTML = "<icon name='long-arrow-alt-left'></icon>";
+                btns[54].innerHTML = '<icon name="windows"></icon>';
+                
                 // If guitar
                 if (true) {
+                    
                     for (let b of btns) {
-                        switch (parseInt(b.dataset.id)) {
+                        let i = parseInt(b.dataset.id);
+                        
+                        if (i < 61)
+                            this.keyboardL[i].spanKey = this.keyboardL[i].spanKeyGuitar;
+                        
+                        switch (i) {
                             case 1:
-                            case 2:
                             case 15:
-                            case 16:
                             case 29:
-                            case 30:
                             case 42:
+                            case 2:
+                            case 16:
+                            case 30:
                             case 43:
                                 b.classList.add("chord-6");
                                 break;
                             case 3:
-                            case 4:
                             case 17:
-                            case 18:
                             case 31:
-                            case 32:
                             case 44:
+                            case 4:
+                            case 18:
+                            case 32:
                             case 45:
                                 b.classList.add("chord-5");
                                 break;
                             case 5:
-                            case 6:
                             case 19:
-                            case 20:
                             case 33:
-                            case 34:
                             case 46:
+                            case 6:
+                            case 20:
+                            case 34:
                             case 47:
                                 b.classList.add("chord-4");
                                 break;
                             case 7:
-                            case 8:
                             case 21:
-                            case 22:
                             case 35:
-                            case 36:
                             case 48:
+                            case 8:
+                            case 22:
+                            case 36:
                             case 49:
                                 b.classList.add("chord-3");
                                 break;
                             case 9:
-                            case 10:
                             case 23:
-                            case 24:
                             case 37:
-                            case 38:
                             case 50:
+                            case 10:
+                            case 24:
+                            case 38:
                             case 51:
                                 b.classList.add("chord-2");
                                 break;
                             case 11:
-                            case 12:
                             case 25:
+                            case 39:
+                            case 12:
                             case 26:
                             case 27:
-                            case 39:
                                 b.classList.add("chord-1");
                                 break;
                             case 41:
@@ -544,9 +614,13 @@
 <style lang="scss" scoped>
 	#main {
 		align-items: center;
+        color: rgb(248, 248, 248);
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
+/*		flex-direction: column;*/
+        flex-wrap: wrap;
+		justify-content: space-around;
+        text-shadow: 0 0 2px #272727;
+/*        width: 24rem;*/
 	}
 	
 	.pad {
@@ -554,95 +628,124 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		margin: 10px;
+        width: auto;
 	}
 	
 	#left-keyboard {
 		width: inherit;
 	}
+    
+    #legend {
+        height: 11rem;
+        display: grid;
+        font-weight: bolder;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10px;
+        grid-row-gap: 2px;
+    }
+    
+    #legend p {
+        grid-column: span 2;
+    }
 	
 	#right-keyboard {
-		width: 7rem;
+/*        align-self: flex-end;*/
+        margin: 10px 5rem;
+		width: 11rem;
 	}
 	
 	.btn {
 		align-items: center;
 		background: #363636;
-		border: solid 1px white;
+		border: solid 2px rgba(221, 221, 221, 0.75);
 		border-radius: 3px;
 		display: flex;
 		font-size: .75rem;
-		height: 1.5rem;
+		height: 2.2rem;
 		justify-content: center;
 		list-style: none;
-		margin: .05rem;
-		width: 1.4rem;
+		margin: .1rem .05rem;
+		width: 2.4rem;
 	}
-	
+    
+    .btn-text {
+
+    }
+    
+    .btn-key {
+        align-self: flex-end;
+        color: white;
+        font-weight: bolder;
+        margin-left: .6rem;
+        position: absolute;
+    }
+    
+    /* Size x1.5 */
 	.weight-1h {
-		width: 2.15rem;
-	}
-	
-	.weight-2 {
-		width: 2.9rem;
-	}
-	
-	.weight-2h {
 		width: 3.65rem;
 	}
-	
+    /* Size x2 */
+	.weight-2 {
+		width: 4.9rem;
+	}
+    /* Size x2.5 */
+	.weight-2h {
+		width: 6.15rem;
+	}
+    /* Size x3 */
 	.weight-3 {
-		width: 4.4rem;
+		width: 7.4rem;
 	}
-	
+    /* Size x3.5 */
 	.weight-3h {
-		width: 5.15rem;
+		width: 8.65rem;
 	}
-	
+    /* Size (1/2)/7 */
 	.weight-ab {
-		width: 1.9rem;
+		width: 2.405rem;
 	}
-	
+    /* Size 1/2 */
 	.weight-space {
-		width: 8.4rem;
+		width: 19.9rem;
 	}
-	
+    /* Size VERTICAL x2 */
 	.weight-v {
 /*		height: 2.9rem;*/
 	}
     
     /* Guitar */
     .chord-6 {
-		background: hsl(15, 64%, 55%);
+		background: hsl(15, 65%, 45%);
 	}
     .chord-5 {
-		background: hsl(355, 50%, 47%);
+		background: hsl(355, 60%, 40%);
 	}
     .chord-4 {
-		background: hsl(335, 50%, 62%);
+		background: hsl(335, 50%, 55%);
 	}
     .chord-3 {
-		background: hsl(315, 50%, 47%);
+		background: hsl(315, 45%, 40%);
 	}
     .chord-2 {
-		background: hsl(135, 50%, 47%);
+		background: hsl(135, 55%, 35%);
 	}
     .chord-1 {
-		background: hsl(70, 60%, 45%);
+		background: hsl(70, 50%, 45%);
 	}
-    
     
 	.special {
         background: hsl(200, 50%, 47%);
     }
     
+    /* Effects */
 	.disabled {
-		opacity: .5;
+        background: #656565;
+        border: solid 2px rgba(221, 221, 221, 0.5);
+		opacity: .85;
 	}
-	
 	.active {
 		background: red;
 	}
-	
     .test {
         color: green;
         background: blue;

@@ -19,7 +19,7 @@ export function getSound(instr, key) {
 //    if (instr.type === "drumkit")
 //        console.log();
     
-    let path = "/static/sounds/acoustic_guitar/" + instr + "/" + name + ".wav";
+    let path = "/static/sounds/electric_guitar/" + instr.toLowerCase() + "/" + name + ".wav";
 //    console.log(path);
     let sound = api.getSound(path);
     return sound;
@@ -59,61 +59,61 @@ function checkKey(i, k) {
 				return false;
             case 49:
                 return "6_00";
-            case 50:
-                return "6_01";
             case 65:
-                return "6_02";
-            case 90:
-                return "6_03";
+                return "6_01";
             case 81:
-                return "6_04";
-            case 83:
-                return "6_05";
+                return "6_02";
             case 87:
+                return "6_03";
+            case 50:
+                return "6_04";
+            case 90:
+                return "6_05";
+            case 83:
                 return "6_06";
             case 88:
                 return "6_07";
             case 51:
                 return "5_00";
-            case 52:
-                return "5_01";
             case 69:
-                return "5_02";
-            case 82:
-                return "5_03";
+                return "5_01";
             case 68:
-                return "5_04";
-            case 70:
-                return "5_05";
+                return "5_02";
             case 67:
+                return "5_03";
+            case 52:
+                return "5_04";
+            case 82:
+                return "5_05";
+            case 70:
                 return "5_06";
             case 86:
                 return "5_07";
 			case 53:
                 return "4_00";
-            case 54:
-                return "4_01";
             case 84:
-                return "4_02";
-            case 89:
-                return "4_03";
+                return "4_01";
             case 71:
-                return "4_04";
-            case 72:
-                return "4_05";
+                return "4_02";
             case 66:
+                return "4_03";
+            case 54:
+                return "4_04";
+            case 89:
+                return "4_05";
+            case 72:
                 return "4_06";
             case 78:
                 return "4_07";
 			case 55:
                 return "3_00";
             case 56:
+            case 74:
                 return "3_01";
             case 85:
                 return "3_02";
             case 73:
                 return "3_03";
-            case 74:
                 return "3_04";
             case 75:
                 return "3_05";

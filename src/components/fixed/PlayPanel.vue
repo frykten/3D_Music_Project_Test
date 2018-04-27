@@ -10,7 +10,7 @@
                     <select name="instr" id="instr" v-model="instrument">
                         <option value="pure_mini_sp">pure_mini_sp</option>
                         <option value="SolarTech_Mini_SP">SolarTech_Mini_SP</option>
-                        <option value="stratocaster">stratocaster</option>
+                        <option value="Stratocaster_HSS">Stratocaster HSS</option>
                     </select>
                 </div>
 
@@ -105,7 +105,7 @@
 		justify-content: space-around;
 		position: fixed;
 		right: 0;
-		width: 25rem;
+		width: 40rem;
 	}
 	
 	.btn {

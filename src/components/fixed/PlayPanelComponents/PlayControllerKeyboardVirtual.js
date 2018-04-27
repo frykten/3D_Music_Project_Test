@@ -155,7 +155,7 @@ export function getSound(instr, key) {
 //    if (instr.type === "drumkit")
 //        console.log();
     
-    let path = "/static/sounds/acoustic_guitar/" + instr + "/" + name + ".wav";
+    let path = "/static/sounds/electric_guitar/" + instr.toLowerCase() + "/" + name + ".wav";
 //    console.log(path);
 //    console.log("Key: " + name);
     let sound = api.getSound(path);

@@ -20,15 +20,15 @@
 		<router-link to="/">
 			<div id="menu" class="menus parts">
 				<div class="parts mini-parts">
-					<icon name="circle"></icon>
+					<icon name="envelope"></icon>
 					<p>Contact</p>
 				</div>
 				<div class="parts mini-parts">
-					<icon name="circle"></icon>
+					<icon name="edit"></icon>
 					<p>Contrib</p>
 				</div>
 				<div class="parts mini-parts">
-					<icon name="circle"></icon>
+					<icon name="calendar-alt"></icon>
 					<p>News</p>
 				</div>
 				<div class="parts mini-parts">
@@ -55,7 +55,7 @@
 		box-shadow: 5px 0px 10px rgba(10,20,20,0.4), 0 10px 16px rgba(10,15,15,0.4);
 		display: flex;
 		height: 9vh;
-/*		justify-content: space-between;*/
+		justify-content: space-between;
 		padding: 0.5rem;
 		position: fixed;
 		width: 100vw;
@@ -95,8 +95,8 @@
 		image-rendering: -webkit-optimize-contrast;
 		-ms-interpolation-mode: nearest-neighbor;
 		image-rendering: pixelated;
-		width: 2rem;
-		margin-right: .5rem;
+		width: 2.5rem;
+		margin: 0 .5rem;
 	}
 	
 	#search-bar {
@@ -107,7 +107,9 @@
 		height: 1.6rem;
 		justify-content: center;
 		margin-left: 1rem;
-		width: 15rem;
+		min-width: 15rem;
+        width: 30rem;
+        max-width: 30vw;
 	}
 	
 	#search-input {
@@ -115,7 +117,7 @@
 		font-size: 1rem;
 		outline: 0;
 		padding: 0 .5rem; 
-		width: 13.5rem;
+		min-width: 13.5rem;
 	}
 	
 	#search-menu {

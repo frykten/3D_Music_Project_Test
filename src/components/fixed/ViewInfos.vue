@@ -8,16 +8,17 @@
 
 		<section id="content">
 			<header id="header">
-				<h2>Fender Stratocaster Standard HSH</h2>
+				<h2>{{instr.name.replace("_", " ")}}</h2>
+				<p>{{instr.type.replace("_", " ")}}</p>
 			</header>
 
 			<div id="messages">
 				<ul>
-					<li class="line"><strong>{{instr.type}}</strong></li>
 					<li v-for="i in instr.infos" class="line">{{i}}</li>
 				</ul>
-
-				<p>Smurf</p>
+				
+				<hr id="hr-links">
+				<a class="links" :href="instr.infoVendors.website">Shop on Fender Merch</a>
 			</div>
 		</section>
 	</section>
@@ -30,11 +31,11 @@
 				isHidden: true,
 				arrow: "chevron-left",
 				instr: {
-					type: "Electric Guitar",
-					name: "Fender_Standard_Strat_HSH_PF_BLK",
+					type: "Electric_Guitar",
+					name: "Stratocaster_SSH",
 					constructor: {
 						name: "Fender",
-						adress: "",
+						adress: "17600 n. Perimeter Drive, Suite 100 Scottsdale, AZ 85255 USA",
 						logo: "url",
 						website: "http"
 					},
@@ -45,19 +46,23 @@
 						"Modern C neck shape",
 						"Pau Ferro Fretboard",
 						"Fretboard Radius 9.5",
-						"21 Medium jumbo frets",
+						"22 Medium jumbo frets",
 						"Scale: 648 mm",
 						"Nut width: 42 mm",
-						"Pickups: 2x Blacktop humbucking (bridge and neck) & 1x standard Strat single coil (middle)",
+						"Pickups: 1x Blacktop humbucking (bridge and neck) & 2x standard Strat single coil (middle)",
 						"5-Way switch",
 						"1x Master volume",
+                        "Greasebucket™ tone circuit (rolls off highs without adding bass)",
 						"2x Tone controls (push / push on the second tone control for coil split)",
 						"Nickel / Chrome hardware",
 						"Vintage-style synchronised tremolo",
-						"Standard string gauge: 009 - 046 (Article Nr: 103326)",
+						"Standard string gauge: 009 - 042",
 						"Finish: Black",
-						"Made in Mexico"
+						"Made in Mexico",
 					],
+                    infoVendors: {
+                        website: "https://shop.fender.com/en-FR/electric-guitars/stratocaster/american-special-stratocaster-hss/0115700300.html?rl=en_US"
+                    },
 				}
 			}
 		},
@@ -75,13 +80,13 @@
 		position: fixed;
 		right: 0;
 		bottom: 3vh;
-		width: 30vw;
+		width: 35vw;
 		height: 88vh;
 		background-color: rgba(211, 211, 211, 0.4);
 	}
 
 	.hidden {
-		right: -30vw !important;
+		right: -35vw !important;
 	}
 
 	#arrow {
@@ -129,11 +134,22 @@
 	#messages {
 		margin: auto;
 		padding: 10px 5px;
+        text-align: left;
 		width: 90%;
-		height: inherit;
+        margin-bottom: 4rem;
 	}
 
 	.line {
-		list-style: circle;
+        margin-bottom: 5px;
+		list-style: disc;
 	}
+    
+    #hr-links {
+        margin: 1rem 5px;
+    }
+    
+    .links {
+        color: #f5f2db;
+        font-weight: bold;
+    }
 </style>
