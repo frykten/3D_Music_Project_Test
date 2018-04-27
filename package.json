@@ -20,6 +20,7 @@
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "howler": "^2.0.9",
     "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.0.13",
     "node-sass": "^4.8.3",
@@ -28,11 +29,13 @@
     "style-loader": "^0.20.3",
     "three": "^0.91.0",
     "three-addons": "^1.1.0",
+    "tunajs": "^1.0.1",
     "vue": "^2.5.2",
     "vue-awesome": "^3.0.0",
     "vue-router": "^3.0.1",
     "vue-socket.io": "^2.1.1-b",
-    "vue-threejs": "0.0.4"
+    "vue-threejs": "0.0.4",
+    "vue2-google-maps": "^0.9.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
