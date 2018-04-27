@@ -13,7 +13,7 @@
 		    <li class="btn chord-2">2nd chord</li>
 		    <li class="btn chord-1">1st chord</li>
 		    <li class="btn special">special key</li>
-		    <li class="btn disabled">not working</li>
+		    <li class="btn disabled">not used</li>
 		</ul>
 		
 		<ul id="right-keyboard" class="pad">
@@ -356,7 +356,7 @@
                 let key = target.dataset.id;
                 
                 let sound = control.getSound(instr, key);
-                sound.play();
+//                sound.play();
                 
                 console.log(key);
 			},
@@ -640,7 +640,7 @@
         display: grid;
         font-weight: bolder;
         grid-template-columns: 1fr 1fr;
-        grid-column-gap: 10px;
+        grid-column-gap: 4px;
         grid-row-gap: 2px;
     }
     

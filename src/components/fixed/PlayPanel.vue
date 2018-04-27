@@ -48,7 +48,8 @@
 	import PlayPanelPlayGuitar from './PlayPanelComponents/PlayPanelPlayGuitar.vue'
     
     var controlKeyboard = require("./PlayPanelComponents/PlayControllerKeyboard.js")
-	
+	var soundApi = require("./PlayPanelComponents/PlayApi.js");
+    
 	export default {
 		data() {
 			return {
@@ -84,12 +85,20 @@
                     let instr = that.instrument;
 
                     let sound = controlKeyboard.getSound(instr, evt.keyCode);
-                    sound.play();
+//                    sound.play();
                 }, true);
             }
 		},
         created() {
             this.keytyping(this);
+            
+        },
+        watch: {
+            instrument: function() {
+                console.log(this.instrument.typeof);
+                let path = "/static/sounds/electric_guitar/" + this.instrument.toLowerCase();
+                soundApi.loadSounds("path");
+            }
         }
 	}
 </script>
