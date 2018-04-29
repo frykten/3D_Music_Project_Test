@@ -1,7 +1,27 @@
 <template lang="html">
-  <div>
-    <p>Ici des FX</p>
-  </div>
+	<div>
+		<div class="line">
+			<p>Overdrive</p>
+		</div>
+		<div class="line">
+			<p>Delay</p>
+		</div>
+		<div class="line">
+			<p>Reverb</p>
+		</div>
+		<div class="line">
+			<p>Wahwah</p>
+		</div>
+		<div class="line">
+			<p>Tremolo</p>
+		</div>
+		<div class="line">
+			<p>Phaser</p>
+		</div>
+		<div class="line">
+			<p>Chorus</p>
+		</div>
+	</div>
 </template>
 
 <script>

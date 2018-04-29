@@ -81,11 +81,10 @@
                     if (evt.key === undefined)
                         return;
 
-                    console.log(evt.keyCode);
+//                    console.log(evt.keyCode);
                     let instr = that.instrument;
 
-                    let sound = controlKeyboard.getSound(instr, evt.keyCode);
-//                    sound.play();
+                    controlKeyboard.getSound(instr, evt.keyCode);
                 }, true);
             }
 		},
@@ -95,9 +94,10 @@
         },
         watch: {
             instrument: function() {
-                console.log(this.instrument.typeof);
+                console.log(this.instrument);
                 let path = "/static/sounds/electric_guitar/" + this.instrument.toLowerCase();
-                soundApi.loadSounds("path");
+//                console.log(path);
+                soundApi.loadSounds(path);
             }
         }
 	}
@@ -127,6 +127,7 @@
 	}
 	
 	.btn-img {
+		margin: auto;
 		width: 1.5rem;
 	}
 	

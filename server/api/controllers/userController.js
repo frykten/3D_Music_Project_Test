@@ -45,7 +45,7 @@ exports.getUsers = function(req, res) {
 
 exports.postUser = function(req, res) {
     var new_user = new User(req.body);
-    new_user.hash_password = bcrypt.hashSync(req.body.password, 10);
+//    new_user.hash_password = bcrypt.hashSync(req.body.password, 10);
     userRepository.save(new_user)
     .then(function(user){
         res.json(user);

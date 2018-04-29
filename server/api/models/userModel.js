@@ -4,12 +4,11 @@ const mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       ObjectId = Schema.Types.ObjectId;
 
-//TODO add validators cf mongoose Validators
 var UserSchema = new Schema({
-    _id: {
-        type: ObjectId,
-        required: true
-    },
+//    _id: {
+//        type: ObjectId,
+//        required: true
+//    },
 
     pseudo: {
         type: String,

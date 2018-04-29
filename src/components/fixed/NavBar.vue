@@ -44,7 +44,23 @@
 </template>
 
 <script>
+	const axios = require('axios');
+	
 	export default {
+		data() {
+			return {
+				instr: null,
+			}
+		},
+		mounted() {
+			axios.get('http://localhost:3000/instr')
+				.then((res) => {
+					console.log(res.data[0]);
+					this.instr = res.data[0];
+				}).catch((err) => {
+					console.log(err);
+				});
+		},
 	}
 </script>
 

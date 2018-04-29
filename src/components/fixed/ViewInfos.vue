@@ -18,7 +18,7 @@
 				</ul>
 				
 				<hr id="hr-links">
-				<a class="links" :href="instr.infoVendors.website">Shop on Fender Merch</a>
+				<a target="_blank" rel="noopener noreferrer" class="links" :href="instr.infoVendors.website">Shop on Fender Merch</a>
 			</div>
 		</section>
 	</section>
@@ -28,7 +28,7 @@
 	export default {
 		data() {
 			return {
-				isHidden: true,
+				isHidden: false,
 				arrow: "chevron-left",
 				instr: {
 					type: "Electric_Guitar",

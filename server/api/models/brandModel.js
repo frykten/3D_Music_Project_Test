@@ -1,16 +1,12 @@
 'use strict';
 const mongoose = require('mongoose'),
-      bcrypt = require('bcrypt'),
-      Schema = mongoose.Schema;
-      ObjectId = Schema.TypesObjectId;
+      Schema = mongoose.Schema,
+      ObjectId = Schema.Types.ObjectId;
 
-//TODO add validators cf mongoose Validators
+// TODO: create a vendor model on another file
+
+// Brands
 var BrandSchema = new Schema({
-    _id: {
-        type: ObjectId,
-        required: true
-    },
-
     name: {
         type: String,
         required: true
@@ -34,5 +30,5 @@ var BrandSchema = new Schema({
 });
 
 module.exports = mongoose.model('Brand', BrandSchema);
-// Vendor are yet to implement
+// Vendors are yet to implement on another file
 //module.exports = mongoose.model('Vendor', VendorSchema);

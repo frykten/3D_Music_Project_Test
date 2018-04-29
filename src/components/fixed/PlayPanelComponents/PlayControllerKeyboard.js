@@ -1,14 +1,12 @@
 var api = require("./PlayApi.js");
 
 export function getSound(instr, key) {
-    let name;
+    let note;
     
-	if (!checkKey(instr, key))
+	if (checkKey(instr, key) === false)
 		return;
     else
-        name = checkKey(instr, key);
-    // temporary
-    key = "01";
+        note = checkKey(instr, key);
     
 //    if (instr.type === "guitar")
 //        console.log();
@@ -19,10 +17,7 @@ export function getSound(instr, key) {
 //    if (instr.type === "drumkit")
 //        console.log();
     
-    let path = "/static/sounds/electric_guitar/" + instr.toLowerCase() + "/" + name + ".wav";
-//    console.log(path);
-    let sound = api.getSound(path);
-    return sound;
+	api.getSound(note);
 }
 
 function checkKey(i, k) {
@@ -57,98 +52,104 @@ function checkKey(i, k) {
 			case 104:
 			case 105:
 				return false;
+			// 6_00
             case 49:
-                return "6_00";
+                return 0;
             case 65:
-                return "6_01";
+                return 1;
             case 81:
-                return "6_02";
+                return 2;
             case 87:
-                return "6_03";
+                return 3;
             case 50:
-                return "6_04";
+                return 4;
             case 90:
-                return "6_05";
+                return 5;
             case 83:
-                return "6_06";
+                return 6;
             case 88:
-                return "6_07";
+                return 7;
+			// 5_00
             case 51:
-                return "5_00";
+                return 0 +22;
             case 69:
-                return "5_01";
+                return 1 +22;
             case 68:
-                return "5_02";
+                return 2 +22;
             case 67:
-                return "5_03";
+                return 3 +22;
             case 52:
-                return "5_04";
+                return 4 +22;
             case 82:
-                return "5_05";
+                return 5 +22;
             case 70:
-                return "5_06";
+                return 6 +22;
             case 86:
-                return "5_07";
+                return 7 +22;
+			// 4_00
 			case 53:
-                return "4_00";
+                return 0 +22*2;
             case 84:
-                return "4_01";
+                return 1 +22*2;
             case 71:
-                return "4_02";
+                return 2 +22*2;
             case 66:
-                return "4_03";
+                return 3 +22*2;
             case 54:
-                return "4_04";
+                return 4 +22*2;
             case 89:
-                return "4_05";
+                return 5 +22*2;
             case 72:
-                return "4_06";
+                return 6 +22*2;
             case 78:
-                return "4_07";
+                return 7 +22*2;
+			// 3_00
 			case 55:
-                return "3_00";
-            case 56:
-            case 74:
-                return "3_01";
+                return 0 +22*3;
             case 85:
-                return "3_02";
-            case 73:
-                return "3_03";
-                return "3_04";
-            case 75:
-                return "3_05";
+                return 1 +22*3;
+            case 74:
+                return 2 +22*3;
             case 188:
-                return "3_06";
+                return 3 +22*3;
+            case 56:
+                return 4 +22*3;
+            case 73:
+                return 5 +22*3;
+            case 75:
+                return 6 +22*3;
             case 190:
-                return "3_07";
+                return 7 +22*3;
+			// 2_00
 			case 57:
-                return "2_00";
-            case 48:
-                return "2_01";
+                return 0 +22*4;
             case 79:
-                return "2_02";
-            case 80:
-                return "2_03";
+                return 1 +22*4;
             case 76:
-                return "2_04";
-            case 77:
-                return "2_05";
+                return 2 +22*4;
             case 191:
-                return "2_06";
+                return 3 +22*4;
+            case 48:
+                return 4 +22*4;
+            case 80:
+                return 5 +22*4;
+            case 77:
+                return 6 +22*4;
             case 223:
-                return "2_07";
+                return 7 +22*4;
+			// 1_00
 			case 219:
-                return "1_00";
-            case 187:
-                return "1_01";
+                return 0 +22*5;
             case 221:
-                return "1_02";
-            case 186:
-                return "1_03";
-            case 220:
-                return "1_04";
+                return 1 +22*5;
 			case 192:
-                return "1_05";
+                return 2 +22*5;
+            case 186:
+                return 3 +22*5;
+            case 187:
+                return 4 +22*5;
+            case 220:
+                return 5 +22*5;
 			default:
 				return false;
 		}

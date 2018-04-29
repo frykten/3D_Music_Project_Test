@@ -1,11 +1,11 @@
 <template lang="html">
 	<div id="main">
-		<router-link to="/play"  v-if="this.$route.path !== '/play'">
-	 		<h2 class="play">Play</h2>
+		<router-link to="/view" v-if="this.$route.path !== '/view'">
+	 		<h2 class="view">View</h2>
 		</router-link>
 		
-		<router-link to="/view" v-else>
-	 		<h2 class="view">View</h2>
+		<router-link to="/play" v-else>
+	 		<h2 class="play">Play</h2>
 		</router-link>
 	</div>
 </template>
