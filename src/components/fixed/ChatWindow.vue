@@ -50,25 +50,6 @@
 			showChat() {
 				this.isHidden = !this.isHidden;
 				this.arrow = this.isHidden ? "chevron-right" : "chevron-left";
-			},
-			pingServer() {
-			  // Send the "pingServer" event to the server.
-			  this.$socket.emit('pingServer', 'PING!')
-			}
-		},
-		sockets: {
-			connect() {
-			  // Fired when the socket connects.
-			  this.isConnected = true;
-			},
-
-			disconnect() {
-			  this.isConnected = false;
-			},
-
-			// Fired when the server sends something on the "messageChannel" channel.
-			messageChannel(data) {
-			  this.socketMessage = data
 			}
 		},
 	}
@@ -81,6 +62,7 @@
 		height: 22rem;
 		position: absolute;
 		width: 15rem;
+        z-index: 100;
 	}
 
 	.hidden {

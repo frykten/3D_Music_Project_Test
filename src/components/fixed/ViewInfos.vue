@@ -1,7 +1,7 @@
 <template lang="html">
 	<section id="info" :class="{hidden: isHidden}">
 		<div id="arrow">
-			<div @click="showChat()">
+			<div @click="showPanel()">
 				<icon :name='arrow' scale="5"></icon>
 			</div>
 		</div>
@@ -19,12 +19,17 @@
 				
 				<hr id="hr-links">
 				<a target="_blank" rel="noopener noreferrer" class="links" :href="instr.infoVendors.website">Shop on Fender Merch</a>
+				
+				<map-c></map-c>
+				
 			</div>
 		</section>
 	</section>
 </template>
 
 <script>
+    import MapC from './Map.vue'
+    
 	export default {
 		data() {
 			return {
@@ -66,8 +71,11 @@
 				}
 			}
 		},
+        components: {
+            MapC
+        },
 		methods: {
-			showChat() {
+			showPanel() {
 				this.isHidden = !this.isHidden;
 				this.arrow = this.isHidden ? "chevron-left" : "chevron-right";
 			}

@@ -1,12 +1,17 @@
 var api = require("./PlayApi.js");
 
-export function getSound(instr, key) {
+export function getSound(instr, evt) {
     let note;
+    let key = evt.keyCode;
+    let isShift = evt.shiftKey;
     
 	if (checkKey(instr, key) === false)
 		return;
     else
         note = checkKey(instr, key);
+    
+    if (isShift)
+        note += 8;
     
 //    if (instr.type === "guitar")
 //        console.log();

@@ -47,12 +47,22 @@ export default {
     initMeshObj() {
 		var mtlLoader = new ThreeAddons.MTLLoader();
 		var loading = new Promise((res, rej) => {	
-			mtlLoader.load('./static/models/r2/r2-d2.mtl', (materials) => {
+//			mtlLoader.load('./static/models/r2/r2-d2.mtl', (materials) => {
+//				materials.preload();
+//				var objLoader = new ThreeAddons.OBJLoader();
+//				//objLoader.setMaterials(materials);
+//				objLoader.load('./static/models/r2/r2-d2.obj', (object) => {
+//					object.position.y -= 70;
+//					object.position.x -= 0;
+//					res(object);
+//				});
+//			});
+            mtlLoader.load('./static/models/electric_guitar/stratocaster_hss/STRATOCASTER_HSS.mtl', (materials) => {
 				materials.preload();
 				var objLoader = new ThreeAddons.OBJLoader();
 				//objLoader.setMaterials(materials);
-				objLoader.load('./static/models/r2/r2-d2.obj', (object) => {
-					object.position.y -= 70;
+				objLoader.load('./static/models/electric_guitar/stratocaster_hss/STRATOCASTER_HSS.obj', (object) => {
+					object.position.y -= 0;
 					object.position.x -= 0;
 					res(object);
 				});

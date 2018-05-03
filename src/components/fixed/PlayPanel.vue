@@ -1,9 +1,10 @@
 <template lang="html">
 	<div>
 		<section class="play-panel" v-if="isLoaded">
-            <play-panel-fx v-if="!isPlaying"></play-panel-fx>
+            <play-panel-fx v-if="isPlaying === 'FX'"></play-panel-fx>
+            <play-panel-settings v-if="isPlaying === 'settings'"></play-panel-settings>
             
-            <section v-else>
+            <section v-if="isPlaying === 'play'">
                 <h2 class="play-title">Play</h2>
                 
                 <div>
@@ -21,15 +22,16 @@
                 </section>
 
                 <div id="play-style">
-                        <play-panel-play-keyboard v-if="panel == 'keyboard'" :child-instr="instrument"></play-panel-play-keyboard>
-                        <play-panel-play-piano v-if="panel == 'piano'" :child-instr="instrument"></play-panel-play-piano>
-                        <play-panel-play-guitar v-if="panel == 'g-fret'" :child-instr="instrument"></play-panel-play-guitar>
+                        <play-panel-play-keyboard v-if="panel == 'keyboard'" :child-instr="instrument" :is-shift="isShift"></play-panel-play-keyboard>
+                        <play-panel-play-piano v-if="panel == 'piano'" :child-instr="instrument" :is-shift="isShift"></play-panel-play-piano>
+                        <play-panel-play-guitar v-if="panel == 'g-fret'" :child-instr="instrument" :is-shift="isShift"></play-panel-play-guitar>
                 </div>
 			</section>
 
 			<section id="modifiers">
 				<button class="btn play" @click="changeView('play')"><icon name="play"></icon></button>
 				<button class="btn fx" @click="changeView('FX')"><p><b>FX</b></p></button>
+				<button class="btn settings" @click="changeView('settings')"><icon name="cog"></icon></button>
 			</section>
 		</section>
 
@@ -43,6 +45,7 @@
 
 <script>
 	import PlayPanelFx from './PlayPanelComponents/PlayPanelFx.vue'
+	import PlayPanelSettings from './PlayPanelComponents/PlayPanelSettings.vue'
 	import PlayPanelPlayKeyboard from './PlayPanelComponents/PlayPanelPlayKeyboardVirtual.vue'
 	import PlayPanelPlayPiano from './PlayPanelComponents/PlayPanelPlayPiano.vue'
 	import PlayPanelPlayGuitar from './PlayPanelComponents/PlayPanelPlayGuitar.vue'
@@ -54,43 +57,47 @@
 		data() {
 			return {
 				isLoaded: true,
-                isPlaying: true,
+                isPlaying: "play",
 				panel: "keyboard",
+                
+                isShift: false,
                 
                 instrument: null
 			}
 		},
 		components: {
 			PlayPanelFx,
+            PlayPanelSettings,
 			PlayPanelPlayKeyboard,
             PlayPanelPlayPiano,
             PlayPanelPlayGuitar,
 		},
 		methods: {
 			changeView(evt) {
-                this.isPlaying = evt === "play" ? true : false;
+                this.isPlaying = evt;
 			},
             changePanel(evt) {
-				console.log(evt);
-                console.log(this.instrument);
-                
 				this.panel = evt;
             },
             keytyping(that) {
                 window.addEventListener("keydown", function (evt) {
+                    that.isShift = evt.shiftKey || evt.getModifierState( 'CapsLock' ) || false;
+                    
                     if (evt.key === undefined)
                         return;
-
 //                    console.log(evt.keyCode);
+                    
                     let instr = that.instrument;
 
-                    controlKeyboard.getSound(instr, evt.keyCode);
+                    controlKeyboard.getSound(instr, evt);
                 }, true);
+                window.addEventListener("keyup", (evt => {
+                    that.isShift = evt.getModifierState( 'CapsLock' ) || evt.shiftKey || false;
+                }), true);
             }
 		},
-        created() {
+        mounted() {
             this.keytyping(this);
-            
         },
         watch: {
             instrument: function() {

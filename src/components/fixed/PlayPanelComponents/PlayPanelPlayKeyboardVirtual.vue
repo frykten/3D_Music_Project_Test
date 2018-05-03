@@ -1,20 +1,20 @@
 <template lang="html">
 	<section id="main">
 		<ul id="left-keyboard" class="pad">
-			<li class="btn" v-for="(key, id) in keyboardL" :class="key.class" :data-id="id" @mousedown="activeBtn($event)" @mouseup="unActiveBtn($event)"><p class="btn-text">{{key.text}}</p><span class="btn-key">{{key.spanKey}}</span></li>
+			<li class="btn" v-for="(key, id) in keyboardL" :class="key.class" :data-id="id" @mousedown="activeBtn($event)" @mouseup="unActiveBtn($event)"><span class="btn-nb">{{isShift ? (!key.spanNb ? '' : (parseInt(key.spanNb) + 8)) : key.spanNb}}</span><p class="btn-text">{{key.text}}</p><span class="btn-key">{{key.spanKey}}</span></li>
 		</ul>
 		
-		<ul id="legend" class="pad">
-            <p>Legend</p>
-		    <li class="btn chord-6">6th chord</li>
-		    <li class="btn chord-5">5th chord</li>
-		    <li class="btn chord-4">4th chord</li>
-		    <li class="btn chord-3">3rd chord</li>
-		    <li class="btn chord-2">2nd chord</li>
-		    <li class="btn chord-1">1st chord</li>
-		    <li class="btn special">special key</li>
-		    <li class="btn disabled">not used</li>
-		</ul>
+		<div id="legend" class="pad">
+            <p id="legend-text">Legend</p>
+		    <p class="btn chord-6">6th chord</p>
+		    <p class="btn chord-5">5th chord</p>
+		    <p class="btn chord-4">4th chord</p>
+		    <p class="btn chord-3">3rd chord</p>
+		    <p class="btn chord-2">2nd chord</p>
+		    <p class="btn chord-1">1st chord</p>
+		    <p class="btn special">special key</p>
+		    <p class="btn disabled">not used</p>
+		</div>
 		
 		<ul id="right-keyboard" class="pad">
 			<li class="btn" v-for="(key, id) in keyboardR" :class="key.class" :data-id="id + 61" @mousedown="activeBtn($event)" @mouseup="unActiveBtn($event)">{{key.text}}</li>
@@ -30,323 +30,363 @@
 			return {
 				keyboardL: [
 					{
-						text: "²", spanKey: "",
+						text: "²", spanKey: "", spanNb: "",
 						class: "weight-1h ",
 					},
 					{
-						text: "&", spanKey: "",
+						text: "&", spanKey: "", spanNb: "",
                         spanKeyGuitar: "E",
+                        spanNbGuitar: "0",
 					},
 					{
-						text: "é", spanKey: "",
+						text: "é", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Ab",
+                        spanNbGuitar: "4",
 					},
 					{
-						text: '"', spanKey: "",
+						text: '"', spanKey: "", spanNb: "",
                         spanKeyGuitar: "A",
+                        spanNbGuitar: "0",
 					},
 					{
-						text: "'", spanKey: "",
+						text: "'", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Db",
+                        spanNbGuitar: "4",
 					},
 					{
-						text: "(", spanKey: "",
+						text: "(", spanKey: "", spanNb: "",
                         spanKeyGuitar: "D",
+                        spanNbGuitar: "0",
 					},
 					{
-						text: "-", spanKey: "",
+						text: "-", spanKey: "", spanNb: "",
                         spanKeyGuitar: "F",
+                        spanNbGuitar: "4",
 					},
 					{
-						text: "è", spanKey: "",
+						text: "è", spanKey: "", spanNb: "",
                         spanKeyGuitar: "G",
+                        spanNbGuitar: "0",
 					},
 					{
-						text: "_", spanKey: "",
+						text: "_", spanKey: "", spanNb: "",
                         spanKeyGuitar: "B",
+                        spanNbGuitar: "4",
 					},
 					{
-						text: "ç", spanKey: "",
+						text: "ç", spanKey: "", spanNb: "",
                         spanKeyGuitar: "B",
+                        spanNbGuitar: "0",
 					},
 					{
-						text: "à", spanKey: "",
+						text: "à", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Eb",
+                        spanNbGuitar: "4",
 					},
 					{
-						text: ")", spanKey: "",
+						text: ")", spanKey: "", spanNb: "",
                         spanKeyGuitar: "E",
-						class: "",
+                        spanNbGuitar: "0",
 					},
 					{
-						text: "=", spanKey: "",
+						text: "=", spanKey: "", spanNb: "",
                         spanKeyGuitar: "G",
-						class: "",
+                        spanNbGuitar: "3",
 					},
 					{
-						text: "backarrow", spanKey: "",
+						text: "backarrow", spanKey: "", spanNb: "",
 						class: "weight-1h ",
 					},
 					{
-						text: "tab", spanKey: "",
+						text: "tab", spanKey: "", spanNb: "",
 						class: "weight-2 ",
 					},
 					{
-						text: "a", spanKey: "",
+						text: "a", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Fb",
+                        spanNbGuitar: "1",
 					},
 					{
-						text: "z", spanKey: "",
+						text: "z", spanKey: "", spanNb: "",
                         spanKeyGuitar: "A",
+                        spanNbGuitar: "5",
 					},
 					{
-						text: "e", spanKey: "",
+						text: "e", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Bb",
+                        spanNbGuitar: "1",
 					},
 					{
-						text: "r", spanKey: "",
+						text: "r", spanKey: "", spanNb: "",
                         spanKeyGuitar: "D",
+                        spanNbGuitar: "5",
 					},
 					{
-						text: "t", spanKey: "",
+						text: "t", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Eb",
+                        spanNbGuitar: "1",
 					},
 					{
-						text: "y", spanKey: "",
+						text: "y", spanKey: "", spanNb: "",
                         spanKeyGuitar: "G",
+                        spanNbGuitar: "5",
 					},
 					{
-						text: "u", spanKey: "",
+						text: "u", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Ab",
+                        spanNbGuitar: "1",
 					},
 					{
-						text: "i", spanKey: "",
+						text: "i", spanKey: "", spanNb: "",
                         spanKeyGuitar: "C",
+                        spanNbGuitar: "5",
 					},
 					{
-						text: "o", spanKey: "",
+						text: "o", spanKey: "", spanNb: "",
                         spanKeyGuitar: "C",
+                        spanNbGuitar: "1",
 					},
 					{
-						text: "p", spanKey: "",
+						text: "p", spanKey: "", spanNb: "",
                         spanKeyGuitar: "E",
+                        spanNbGuitar: "5",
 					},
 					{
-						text: "^", spanKey: "",
+						text: "^", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Fb",
-						class: "",
+                        spanNbGuitar: "1",
 					},
 					{
-						text: "$", spanKey: "",
+						text: "$", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Ab",
-						class: "",
+                        spanNbGuitar: "4",
 					},
 					{
-						text: "*", spanKey: "",
+						text: "*", spanKey: "", spanNb: "",
                         spanKeyGuitar: "A",
-						class: "",
+						spanNbGuitar: "5",
 					},
 					{
-						text: "caps", spanKey: "",
+						text: "caps", spanKey: "", spanNb: "",
 						class: "weight-2h ",
 					},
 					{
-						text: "q", spanKey: "",
+						text: "q", spanKey: "", spanNb: "",
                         spanKeyGuitar: "F",
+                        spanNbGuitar: "2",
 					},
 					{
-						text: "s", spanKey: "",
+						text: "s", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Bb",
+                        spanNbGuitar: "6",
 					},
 					{
-						text: "d", spanKey: "",
+						text: "d", spanKey: "", spanNb: "",
                         spanKeyGuitar: "B",
+                        spanNbGuitar: "2",
 					},
 					{
-						text: "f", spanKey: "",
+						text: "f", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Eb",
+                        spanNbGuitar: "6",
 					},
 					{
-						text: "g", spanKey: "",
+						text: "g", spanKey: "", spanNb: "",
                         spanKeyGuitar: "E",
+                        spanNbGuitar: "2",
 					},
 					{
-						text: "h", spanKey: "",
+						text: "h", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Ab",
+                        spanNbGuitar: "6",
 					},
 					{
-						text: "j", spanKey: "",
+						text: "j", spanKey: "", spanNb: "",
                         spanKeyGuitar: "A",
+                        spanNbGuitar: "2",
 					},
 					{
-						text: "k", spanKey: "",
+						text: "k", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Db",
+                        spanNbGuitar: "6",
 					},
 					{
-						text: "l", spanKey: "",
+						text: "l", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Db",
+                        spanNbGuitar: "2",
 					},
 					{
-						text: "m", spanKey: "",
+						text: "m", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Fb",
+                        spanNbGuitar: "6",
 					},
 					{
-						text: "ù", spanKey: "",
+						text: "ù", spanKey: "", spanNb: "",
                         spanKeyGuitar: "F",
-						class: "",
+                        spanNbGuitar: "2",
 					},
 					{
-						text: "enter", spanKey: "",
+						text: "enter", spanKey: "", spanNb: "",
 						class: "weight-1h ",
 					},
 					{
-						text: "shift", spanKey: "",
+						text: "shift", spanKey: "", spanNb: "",
 						class: "weight-3",
 					},
 					{
-						text: "w", spanKey: "",
+						text: "w", spanKey: "", spanNb: "",
                         spanKeyGuitar: "G",
+                        spanNbGuitar: "3",
 					},
 					{
-						text: "x", spanKey: "",
+						text: "x", spanKey: "", spanNb: "",
                         spanKeyGuitar: "B",
+                        spanNbGuitar: "7",
 					},
 					{
-						text: "c", spanKey: "",
+						text: "c", spanKey: "", spanNb: "",
                         spanKeyGuitar: "C",
+                        spanNbGuitar: "3",
 					},
 					{
-						text: "v", spanKey: "",
+						text: "v", spanKey: "", spanNb: "",
                         spanKeyGuitar: "E",
+                        spanNbGuitar: "7",
 					},
 					{
-						text: "b", spanKey: "",
+						text: "b", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Fb",
+                        spanNbGuitar: "3",
 					},
 					{
-						text: "n", spanKey: "",
+						text: "n", spanKey: "", spanNb: "",
                         spanKeyGuitar: "A",
+                        spanNbGuitar: "7",
 					},
 					{
-						text: ",", spanKey: "",
+						text: ",", spanKey: "", spanNb: "",
                         spanKeyGuitar: "Bb",
+                        spanNbGuitar: "3",
 					},
 					{
-						text: ";", spanKey: "",
+						text: ";", spanKey: "", spanNb: "",
                         spanKeyGuitar: "D",
+                        spanNbGuitar: "7",
 					},
 					{
-						text: ":", spanKey: "",
+						text: ":", spanKey: "", spanNb: "",
                         spanKeyGuitar: "D",
+                        spanNbGuitar: "3",
 					},
 					{
-						text: "!", spanKey: "",
+						text: "!", spanKey: "", spanNb: "",
                         spanKeyGuitar: "F",
+                        spanNbGuitar: "7",
 					},
 					{
-						text: "shift", spanKey: "",
+						text: "shift", spanKey: "", spanNb: "",
 						class: "weight-2",
 					},
 					{
-						text: "ctrl", spanKey: "",
+						text: "ctrl", spanKey: "", spanNb: "",
 						class: "weight-ab",
 					},
 					{
-						text: "windows", spanKey: "",
+						text: "windows", spanKey: "", spanNb: "",
 						class: "weight-ab ",
 					},
 					{
-						text: "alt", spanKey: "",
+						text: "alt", spanKey: "", spanNb: "",
 						class: "weight-ab",
 					},
 					{
-						text: "space", spanKey: "",
+						text: "space", spanKey: "", spanNb: "",
 						class: "weight-space",
 					},
 					{
-						text: "<", spanKey: "",
+						text: "<", spanKey: "", spanNb: "",
 						class: "weight-ab ",
 					},
 					{
-						text: "alt gr", spanKey: "",
+						text: "alt gr", spanKey: "", spanNb: "",
 						class: "weight-ab ",
 					},
 					{
-						text: "fn", spanKey: "",
+						text: "fn", spanKey: "", spanNb: "",
 						class: "weight-ab ",
 					},
 					{
-						text: "ctrl", spanKey: "",
+						text: "ctrl", spanKey: "", spanNb: "",
 						class: "weight-ab",
 					},
 				],
 				keyboardR: [
 					{
-						text: "verr", spanKey: "",
+						text: "verr", spanKey: "", spanNb: "",
 						class: "",
 					},
 					{
-						text: "/", spanKey: "",
+						text: "/", spanKey: "", spanNb: "",
 					},
 					{
-						text: "*", spanKey: "",
+						text: "*", spanKey: "", spanNb: "",
 					},
 					{
-						text: "-", spanKey: "",
+						text: "-", spanKey: "", spanNb: "",
 					},
 					{
-						text: "7", spanKey: "",
+						text: "7", spanKey: "", spanNb: "",
 					},
 					{
-						text: "8", spanKey: "",
+						text: "8", spanKey: "", spanNb: "",
 					},
 					{
-						text: "9", spanKey: "",
+						text: "9", spanKey: "", spanNb: "",
 					},
 					{
-						text: "+", spanKey: "",
+						text: "+", spanKey: "", spanNb: "",
 						class: "weight-v ",
 					},
 					{
-						text: "4", spanKey: "",
+						text: "4", spanKey: "", spanNb: "",
 					},
 					{
-						text: "5", spanKey: "",
+						text: "5", spanKey: "", spanNb: "",
 					},
 					{
-						text: "6", spanKey: "",
+						text: "6", spanKey: "", spanNb: "",
 					},
 					{
-						text: "enter", spanKey: "",
+						text: "enter", spanKey: "", spanNb: "",
 						class: "weight-v ",
 					},
 					{
-						text: "1", spanKey: "",
+						text: "1", spanKey: "", spanNb: "",
 					},
 					{
-						text: "2", spanKey: "",
+						text: "2", spanKey: "", spanNb: "",
 					},
 					{
-						text: "3", spanKey: "",
+						text: "3", spanKey: "", spanNb: "",
 					},
 					{
-						class: "", spanKey: "",
+						class: "", spanKey: "", spanNb: "",
 					},
 					{
-						text: "0", spanKey: "",
+						text: "0", spanKey: "", spanNb: "",
 						class: "weight-2 ",
 					},
 					{
-						text: ".", spanKey: "",
+						text: ".", spanKey: "", spanNb: "",
 						class: "",
 					},
 					{
-						class: "", spanKey: "",
+						class: "", spanKey: "", spanNb: "",
 					},
 				],
 			}
 		},
-        props: ['childInstr'],
+        props: ['childInstr', 'isShift'],
 		methods: {
 			activeBtn(event) {
                 let target = event.target.closest("li");
@@ -355,20 +395,20 @@
                 let instr = this.childInstr;
                 let key = target.dataset.id;
                 
-                let sound = control.getSound(instr, key);
+                let sound = control.getSound(instr, key, this.isShift);
 //                sound.play();
                 
-                console.log(key);
+//                console.log(key);
 			},
 			unActiveBtn(event) {
-				event.target.closest("li").classList.remove("active");
+                event.target.closest("li").classList.remove("active");
 			},
             colorBtns() {
                 var btns = document.querySelectorAll("li.btn");
                 
                 // Place icons
-                btns[13].innerHTML = "<icon name='long-arrow-alt-left'></icon>";
-                btns[54].innerHTML = '<icon name="windows"></icon>';
+//                btns[13].innerHTML = "<icon name='long-arrow-alt-left'></icon>";
+//                btns[54].innerHTML = '<icon name="windows"></icon>';
                 
                 // If guitar
                 if (true) {
@@ -376,8 +416,10 @@
                     for (let b of btns) {
                         let i = parseInt(b.dataset.id);
                         
-                        if (i < 61)
+                        if (i < 61) {
                             this.keyboardL[i].spanKey = this.keyboardL[i].spanKeyGuitar;
+                            this.keyboardL[i].spanNb = this.keyboardL[i].spanNbGuitar;
+                        }
                         
                         switch (i) {
                             case 1:
@@ -438,6 +480,7 @@
                             case 27:
                                 b.classList.add("chord-1");
                                 break;
+                            case 28:
                             case 41:
                             case 52:
                             case 53:
@@ -644,7 +687,7 @@
         grid-row-gap: 2px;
     }
     
-    #legend p {
+    #legend-text {
         grid-column: span 2;
     }
 	
@@ -677,6 +720,14 @@
         color: white;
         font-weight: bolder;
         margin-left: .6rem;
+        position: absolute;
+    }
+    
+    .btn-nb {
+        align-self: flex-start;
+        color: white;
+        font-weight: bolder;
+        margin-left: -0.6rem;
         position: absolute;
     }
     

@@ -1,6 +1,6 @@
 var api = require("./PlayApi.js");
 
-export function getSound(instr, key) {
+export function getSound(instr, key, isShift) {
     let note;
     
     switch (parseInt(key)) {
@@ -152,6 +152,8 @@ export function getSound(instr, key) {
             break;
     }
     
+    if (isShift)
+        note += 8;
 //    if (instr.type === "guitar")
 //        console.log();
 //    if (instr.type === "bass")

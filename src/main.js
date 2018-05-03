@@ -15,8 +15,16 @@ Vue.use(Three)
 // Socket.io Use
 //import socketio from 'socket.io'
 //import VueSocketIO from 'vue-socket.io'
-////export const SocketInstance = socketio('http://localhost:3000')
+//export const SocketInstance = socketio('http://localhost:3000')
 //Vue.use(VueSocketIO, 'http://localhost:3000')
+
+// Google Maps Use
+import * as VueGoogleMaps from 'vue2-google-maps'
+Vue.use(VueGoogleMaps, {
+    load: {
+        key: 'AIzaSyCkPCXQNeptCoA_ThDoqakpQgN9xDTrI2Y',
+    }
+})
 
 // Config
 Vue.config.productionTip = false
