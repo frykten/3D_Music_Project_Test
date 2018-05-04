@@ -163,5 +163,5 @@ export function getSound(instr, key, isShift) {
 //    if (instr.type === "drumkit")
 //        console.log();
     
-	api.getSound(note);;
+	api.getSound(note);
 }

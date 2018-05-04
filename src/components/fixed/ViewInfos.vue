@@ -37,7 +37,7 @@
 				arrow: "chevron-left",
 				instr: {
 					type: "Electric_Guitar",
-					name: "Stratocaster_SSH",
+					name: "Stratocaster_HSS",
 					constructor: {
 						name: "Fender",
 						adress: "17600 n. Perimeter Drive, Suite 100 Scottsdale, AZ 85255 USA",

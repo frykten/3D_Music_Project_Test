@@ -9,10 +9,15 @@
 
 			<div class="search parts">
 				<div id="search-bar">
-					<input type="text" id="search-input">
+<!--					<input type="text" id="search-input">-->
+                    <select name="instruments" id="search-select" v-model="selectedInstr">
+                        <option value="" selected></option>
+                        <option :value="i" v-for="i in instr">{{i.name}}</option>
+                    </select>
 					<icon name="bars" id="search-menu"></icon>
 				</div>
-				<button id="search-submit">
+<!--				<button class="search-puts" v-for="i in instr" ref="search">{{i}}</button>-->
+				<button id="search-submit" ref="submit">
 					<icon name="search" id="search-icon"></icon>
 				</button>
 			</div>
@@ -49,18 +54,33 @@
 	export default {
 		data() {
 			return {
-				instr: null,
+				instr: [],
+                selectedInstr: null
 			}
 		},
+        methods: {
+            onChange(){
+                console.log(event.target.value);
+                console.log(this.selected);
+            }
+        },
 		mounted() {
 			axios.get('http://localhost:3000/instr')
 				.then((res) => {
-					console.log(res.data[0]);
-					this.instr = res.data[0];
+                    this.instr = res.data;
 				}).catch((err) => {
-					console.log(err);
+					console.error(err);
 				});
 		},
+        updated() {
+            
+        },
+        watch: {
+            selectedInstr(v) {
+                this.$emit("sel-instr", v);
+                console.log(v);
+            }
+        },
 	}
 </script>
 
@@ -135,6 +155,15 @@
 		padding: 0 .5rem; 
 		min-width: 13.5rem;
 	}
+    .search-puts {
+        border: 0;
+        height: 1.6rem;
+		font-size: 1rem;
+		min-width: 13.5rem;
+		outline: 0;
+		padding: 0 .5rem;
+/*        position: absolute;*/
+    }
 	
 	#search-menu {
 		margin-left: auto;

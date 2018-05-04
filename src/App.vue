@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <nav-bar></nav-bar>
+    <nav-bar @sel-instr="instrument = $event"></nav-bar>
 	
 	<view-button></view-button>
    
     <chat-window></chat-window>
 
-    <three-container></three-container>
+    <three-container :instrument="instrument"></three-container>
 
-    <router-view id="page"/>
+    <router-view id="page" :instrument="instrument"/>
 
     <footer-bar></footer-bar>
   </div>
@@ -24,6 +24,11 @@ import ThreeContainer from './components/fixed/ThreeContainer.vue'
 
 export default {
   name: 'App',
+  data() {
+      return {
+          instrument: null
+      }
+  },
   components: {
     NavBar,
 	ViewButton,

@@ -21,6 +21,7 @@ export default {
       controls: null
     }
   },
+  props: ["instrument"],
   methods: {
     initSettings() {
         const WIDTH = this.container.width;
@@ -57,11 +58,13 @@ export default {
 //					res(object);
 //				});
 //			});
-            mtlLoader.load('./static/models/electric_guitar/stratocaster_hss/STRATOCASTER_HSS.mtl', (materials) => {
+            let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
+            console.log(path);
+            mtlLoader.load(path + '.mtl', (materials) => {
 				materials.preload();
 				var objLoader = new ThreeAddons.OBJLoader();
 				//objLoader.setMaterials(materials);
-				objLoader.load('./static/models/electric_guitar/stratocaster_hss/STRATOCASTER_HSS.obj', (object) => {
+				objLoader.load(path + '.obj', (object) => {
 					object.position.y -= 0;
 					object.position.x -= 0;
 					res(object);

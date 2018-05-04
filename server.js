@@ -76,5 +76,3 @@ app.use(function(req, res) {
 app.listen(port, () => {
     console.log('Guitars : RESTful API server started on: ' + port);	
 });
-
-var io = require('socket.io').listen(app);

@@ -84,10 +84,8 @@
                 let instr = this.childInstr;
                 let key = event.target.dataset.id;
                 
-                let sound = control.getSound(instr, key);
-                sound.play();
-                
-                console.log(key);
+                console.log(event.target);
+//                let sound = control.getSound(instr, key);
 			},
 			unActiveBtn(event) {
 				event.target.classList.remove("active");

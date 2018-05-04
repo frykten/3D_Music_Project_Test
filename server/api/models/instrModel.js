@@ -13,7 +13,7 @@ var InstrSchema = new Schema({
 
     type: {
         type: String,
-		enum: ['Electric Guitar', 'Acoustic Guitar', 'Bass', 'Drumkit', 'Keyboard'],
+		enum: ['Electric_Guitar', 'Acoustic_Guitar', 'Bass', 'Drumkit', 'Keyboard'],
         required: true
     },
 
