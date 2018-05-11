@@ -2,7 +2,7 @@
   <div id="app">
     <nav-bar @sel-instr="instrument = $event"></nav-bar>
 	
-	<view-button></view-button>
+    <view-button></view-button>
    
     <chat-window></chat-window>
 
@@ -31,7 +31,7 @@ export default {
   },
   components: {
     NavBar,
-	ViewButton,
+    ViewButton,
     ChatWindow,
     FooterBar,
     ThreeContainer,
@@ -54,10 +54,10 @@ export default {
     color: lightgray;
     background-color: #111;
     overflow: hidden;
-  text-align: center;
+    text-align: center;
 }
 
 #page {
-margin: 10vh;
+    margin: 10vh;
 }
 </style>

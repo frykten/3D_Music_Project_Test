@@ -48,28 +48,28 @@ export default {
     initMeshObj() {
 		var mtlLoader = new ThreeAddons.MTLLoader();
 		var loading = new Promise((res, rej) => {	
-//			mtlLoader.load('./static/models/r2/r2-d2.mtl', (materials) => {
-//				materials.preload();
-//				var objLoader = new ThreeAddons.OBJLoader();
-//				//objLoader.setMaterials(materials);
-//				objLoader.load('./static/models/r2/r2-d2.obj', (object) => {
-//					object.position.y -= 70;
-//					object.position.x -= 0;
-//					res(object);
-//				});
-//			});
-            let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
-            console.log(path);
-            mtlLoader.load(path + '.mtl', (materials) => {
+			mtlLoader.load('./static/models/r2/r2-d2.mtl', (materials) => {
 				materials.preload();
 				var objLoader = new ThreeAddons.OBJLoader();
 				//objLoader.setMaterials(materials);
-				objLoader.load(path + '.obj', (object) => {
-					object.position.y -= 0;
+				objLoader.load('./static/models/r2/r2-d2.obj', (object) => {
+					object.position.y -= 70;
 					object.position.x -= 0;
 					res(object);
 				});
 			});
+//            let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
+//            console.log(path);
+//            mtlLoader.load(path + '.mtl', (materials) => {
+//				materials.preload();
+//				var objLoader = new ThreeAddons.OBJLoader();
+//				//objLoader.setMaterials(materials);
+//				objLoader.load(path + '.obj', (object) => {
+//					object.position.y -= 0;
+//					object.position.x -= 0;
+//					res(object);
+//				});
+//			});
 		}).then((obj) => {
 			this.mesh = obj;
 			this.scene.add(this.mesh);
