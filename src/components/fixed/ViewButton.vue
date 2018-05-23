@@ -18,9 +18,9 @@ export default {
 <style lang="scss" scoped>
 	#main {
 		align-items: center;
-		background: hsl(182, 68%, 13%);
-		border: solid 3px #90864f;
-		border-radius: 50%;
+		background: hsl(200, 50%, 37%);
+		border: solid 3px rgba(221, 221, 221, 0.75);
+		border-radius: 3px;
 		box-shadow: 5px 0px 10px rgba(10,20,20,0.4), 0 5px 10px rgba(10,15,15,0.6);
 		display: flex;
 		height: 3rem;
@@ -32,7 +32,7 @@ export default {
 	}
 	
 	a, h2 {
-		color: white;
+		color: rgb(248, 248, 248);
 		font-size: 1rem;
 		font-weight: 700;
 		text-decoration: none;

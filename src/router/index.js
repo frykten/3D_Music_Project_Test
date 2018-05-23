@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './../components/pages/Home.vue'
+import LogIn from './../components/pages/LogIn.vue'
+import Register from './../components/pages/Register.vue'
 import ViewWindow from './../components/pages/ViewWindow.vue'
 import PlayWindow from './../components/pages/PlayWindow.vue'
 import Contact from './../components/pages/Contact.vue'
@@ -13,6 +15,16 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+	{
+      path: '/login',
+      name: 'login',
+      component: LogIn
+    },
+	{
+      path: '/register',
+      name: 'register',
+      component: Register
     },
     {
       path: '/view',

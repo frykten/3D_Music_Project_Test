@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <view-infos></view-infos>
+    <view-infos :instrument="instrument"></view-infos>
   </div>
 </template>
 
@@ -8,13 +8,14 @@
 import ViewInfos from './../fixed/ViewInfos.vue'
 
 export default {
-  components: {
-    ViewInfos
-  },
-  data() {
-    return {
-    }
-  },
+	components: {
+		ViewInfos
+	},
+	data() {
+		return {
+		}
+	},
+	props: ["instrument"],
 }
 </script>
 

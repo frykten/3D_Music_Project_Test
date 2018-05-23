@@ -10,6 +10,7 @@ require('dotenv').config({ path: './server/config/local/.env' });
 console.log('Server environment : ' + process.env.NODE_ENV.trim());
 
 let app = express(),
+	cors = require('cors'),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
     jsonwebtoken = require("jsonwebtoken");
@@ -17,6 +18,9 @@ let app = express(),
 //Load models
 let User = require('./server/api/models/userModel'),
     bodyParser = require('body-parser');
+
+// Enable All CORS Requests
+app.options('*', cors({credentials: true}));
 
 // interceptor : verify the authorization   
 app.use(function(req, res, next) {
@@ -68,6 +72,18 @@ app.use(bodyParser.json());
 //importing routes
 let userRoutes = require('./server/api/routes/userRoutes');
 userRoutes(app);
+
+let session = require('express-session'),
+	MongoStore = require('connect-mongo')(session);
+app.use(session({
+	cookie: { secure: true },
+	saveUninitialized: false,
+	secret: "music",
+	store: new MongoStore({
+		mongooseConnection: mongoose.connection
+	}),
+	resave: true,
+}));
 
 app.use(function(req, res) {
     res.status(404).send({ url: req.originalUrl + ' is not implemented' })

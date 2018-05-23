@@ -395,25 +395,29 @@
                 let instr = this.childInstr;
                 let key = target.dataset.id;
                 
-                let sound = control.getSound(instr, key, this.isShift);
-//                sound.play();
-                
 //                console.log(key);
+                let sound = control.getSound(instr, key, this.isShift);
 			},
 			unActiveBtn(event) {
                 event.target.closest("li").classList.remove("active");
 			},
             colorBtns() {
                 var btns = document.querySelectorAll("li.btn");
-                
+				let cls = ["disabled", "special", "chord-6", "chord-5", "chord-4", "chord-3", "chord-2", "chord-1"];
+				let p = null;
+				
+				if (this.childInstr) {
+                	p = this.childInstr.type.toLowerCase();
+				}
                 // Place icons
 //                btns[13].innerHTML = "<icon name='long-arrow-alt-left'></icon>";
 //                btns[54].innerHTML = '<icon name="windows"></icon>';
                 
                 // If guitar
-                if (true) {
-                    
+                if (p == "electric_guitar") {
                     for (let b of btns) {
+						b.classList.remove(...cls);
+						
                         let i = parseInt(b.dataset.id);
                         
                         if (i < 61) {
@@ -493,8 +497,9 @@
                         }
                     }
                 }
-                else if ("bass") {
+                else if (p == "bass") {
                     for (let b of btns) {
+						b.classList.remove(...cls);
                         switch (parseInt(b.dataset.id)) {
                             case 1:
                             case 2:
@@ -568,8 +573,9 @@
                         }
                     }
                 }
-                else if ("piano") {
+                else if (p == "piano") {
                     for (let b of btns) {
+						b.classList.remove(...cls);
                         switch (parseInt(b.dataset.id)) {
                             case 1:
                             case 15:
@@ -626,12 +632,50 @@
                         }
                     }
                 }
-				else if ("drums") {
+				else if (p == "drumkit") {
 					for (let b of btns) {
+						b.classList.remove(...cls);
                         switch (parseInt(b.dataset.id)) {
-							case 1:
-								b.classList.add("special");
+							// Snare
+							case 44:
+								b.classList.add("chord-6");
                                 break;
+							// Hi-hats
+							case 43:
+								b.classList.add("chord-4");
+                                break;
+							case 42:
+								b.classList.add("chord-4");
+                                break;
+							// Toms
+							case 32:
+								b.classList.add("chord-3");
+                                break;
+							case 33:
+								b.classList.add("chord-3");
+                                break;
+							case 46:
+								b.classList.add("chord-3");
+                                break;
+							// Crashes
+							case 18:
+								b.classList.add("chord-2");
+                                break;
+							case 20:
+								b.classList.add("chord-2");
+                                break;
+							// Rides
+							case 30:
+								b.classList.add("chord-1");
+                                break;
+							case 35:
+								b.classList.add("chord-1");
+                                break;
+							// Kick
+							case 56:
+								b.classList.add("chord-5");
+                                break;
+							// Disabled
 							default:
 								b.classList.add("disabled");
 						}
@@ -648,7 +692,9 @@
             }
 		},
         watch: {
-            childInstr: 'colorBtns'
+            childInstr() {
+				this.colorBtns()
+			}
         },
         mounted() { this.colorBtns() },
 	}
@@ -753,11 +799,11 @@
 	}
     /* Size (1/2)/7 */
 	.weight-ab {
-		width: 2.405rem;
+		width: 2.825rem;
 	}
     /* Size 1/2 */
 	.weight-space {
-		width: 19.9rem;
+		width: 16.9rem;
 	}
     /* Size VERTICAL x2 */
 	.weight-v {

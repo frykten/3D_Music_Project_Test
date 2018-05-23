@@ -26,7 +26,9 @@ export function getSound(instr, evt) {
 }
 
 function checkKey(i, k) {
-	if (true) {
+	let p = i.type.toLowerCase();
+	
+	if (p == "electric_guitar") {
 		switch (k) {
 			// Special cases
 			case 222:
@@ -159,7 +161,7 @@ function checkKey(i, k) {
 				return false;
 		}
 	}
-	else if (i == "bass") {
+	else if (p == "bass") {
 		switch (k) {
 			// Special cases
 			case 222:
@@ -188,7 +190,7 @@ function checkKey(i, k) {
 				return true;
 		}
 	}
-	else if (i == "piano") {
+	else if (p == "piano") {
 		switch (k) {
 			// Special cases
 			case 222:
@@ -235,8 +237,36 @@ function checkKey(i, k) {
 				return true;
 		}
 	}
-	else if (i == "drumkit") {
+	else if (p == "drumkit") {
 		switch (k) {
+			// Snare
+			case 67:
+				return 1;
+			// Kick
+			case 32:
+				return 0;
+			// Hi-hats
+			case 88:
+				return 4;
+			case 87:
+				return 4;
+			// Toms
+			case 70:
+				return 1;
+			case 71:
+				return 1;
+			case 66:
+				return 1;
+			// Crashes
+			case 83:
+				return 2;
+			case 74:
+				return 2;
+			// Rides
+			case 82:
+				return 3;
+			case 89:
+				return 3;
 			// Special cases
 			case 222:
 			case 8:
@@ -254,7 +284,7 @@ function checkKey(i, k) {
 			case 110:
 				return false;
 			default:
-				return true;
+				return false;
 		}
 	}
 	else {

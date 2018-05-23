@@ -6,14 +6,6 @@
             
             <section v-if="isPlaying === 'play'">
                 <h2 class="play-title">Play</h2>
-                
-                <div>
-                    <select name="instr" id="instr" v-model="instrument">
-                        <option value="pure_mini_sp">pure_mini_sp</option>
-                        <option value="SolarTech_Mini_SP">SolarTech_Mini_SP</option>
-                        <option value="Stratocaster_HSS">Stratocaster HSS</option>
-                    </select>
-                </div>
 
                 <section id="readers">
                     <button class="btn piano" @click="changePanel('piano')"><img class="btn-img" src="/static/logos/piano_keys.png" alt=""></button>
@@ -62,9 +54,10 @@
                 
                 isShift: false,
                 
-                instrument: null
+//                instrument: null
 			}
 		},
+		props: ["instrument"],
 		components: {
 			PlayPanelFx,
             PlayPanelSettings,
@@ -85,7 +78,6 @@
                     
                     if (evt.key === undefined)
                         return;
-//                    console.log(evt.keyCode);
                     
                     let instr = that.instrument;
 
@@ -98,13 +90,17 @@
 		},
         mounted() {
             this.keytyping(this);
+			
+			let iName = this.instrument.name.toLowerCase();
+			let iType = this.instrument.type.toLowerCase();
+			soundApi.loadSounds(iName, iType);
         },
         watch: {
             instrument: function() {
-                console.log(this.instrument);
-                let path = "/static/sounds/electric_guitar/" + this.instrument.toLowerCase();
-//                console.log(path);
-                soundApi.loadSounds(path);
+                let iName = this.instrument.name.toLowerCase();
+                let iType = this.instrument.type.toLowerCase();
+                
+                soundApi.loadSounds(iName, iType);
             }
         }
 	}

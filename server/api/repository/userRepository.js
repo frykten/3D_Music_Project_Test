@@ -28,7 +28,7 @@ exports.find = function() {
 
 exports.save = function(user){
     return new Promise(function(resolve, reject) {
-        user.save(function(err, user) {
+        User.save(function(err, user) {
             if (err)
                 reject(err);
             resolve(user);
@@ -40,6 +40,16 @@ exports.save = function(user){
 exports.findOneByEmail = function(user){
     return new Promise(function(resolve, reject) {
         User.findOne({email: user.email}, function(err, user) {
+            if (err)
+                reject(err);
+            resolve(user);
+        });
+    });
+}
+
+exports.findOneByName = function(user){
+    return new Promise(function(resolve, reject) {
+        User.findOne({username: user.username}, function(err, user) {
             if (err)
                 reject(err);
             resolve(user);

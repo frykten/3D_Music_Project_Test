@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <play-panel></play-panel>
+    <play-panel :instrument="instrument"></play-panel>
   </div>
 </template>
 
@@ -13,6 +13,7 @@ export default {
 
     }
   },
+  props: ["instrument"],
   components: {
     PlayPanel,
 

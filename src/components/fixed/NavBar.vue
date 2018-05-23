@@ -14,6 +14,7 @@
                         <option value="" selected></option>
                         <option :value="i" v-for="i in instr">{{i.name}}</option>
                     </select>
+                    {{username}}
 					<icon name="bars" id="search-menu"></icon>
 				</div>
 <!--				<button class="search-puts" v-for="i in instr" ref="search">{{i}}</button>-->
@@ -37,11 +38,25 @@
 					<p>News</p>
 				</div>
 				<div class="parts mini-parts">
-					<icon name="circle"></icon>
-					<div class="mini-parts-row">
-						<p>You</p>
-						<icon name="caret-down"></icon>
-					</div>
+					<button id="you-btn" @click="onYouClick()">
+						<icon name="circle"></icon>
+						<div class="mini-parts-row">
+							<p v-if="isLogged">{{username}}</p>
+							<p v-else><router-link to="/login">Log In</router-link></p>
+							<icon name="caret-down"></icon>
+						</div>
+					</button>
+					<ul id="you-dropdown" ref="youDropdown" class="dropdown you signed" :class="{dropdownActive: isActive}">
+						<li class="dropdown-li">
+							<a href="">See profile</a>
+						</li>
+						<li class="dropdown-li">
+							<a href="">Settings?</a>
+						</li>
+						<li class="dropdown-li">
+							<a href="" @click="signOut()">Sign Out</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</router-link>
@@ -55,21 +70,33 @@
 		data() {
 			return {
 				instr: [],
-                selectedInstr: null
+                selectedInstr: null,
+				
+				username: null,
+				isLogged: false,
+				isActive: false
 			}
 		},
+		props: ["profile"],
         methods: {
             onChange(){
                 console.log(event.target.value);
                 console.log(this.selected);
-            }
+            },
+			onYouClick() {
+				console.log(this.$refs.youDropdown);
+				this.isActive =  !this.isActive;
+			},
+			signOut() {
+				this.username = null;
+			}
         },
 		mounted() {
 			axios.get('http://localhost:3000/instr')
 				.then((res) => {
                     this.instr = res.data;
 				}).catch((err) => {
-					console.error(err);
+					console.error(err.response);
 				});
 		},
         updated() {
@@ -78,8 +105,13 @@
         watch: {
             selectedInstr(v) {
                 this.$emit("sel-instr", v);
-                console.log(v);
-            }
+            },
+			profile() {
+				this.username = this.profile;
+			},
+			username() {
+					this.isLogged = this.username ? true : false;
+			}
         },
 	}
 </script>
@@ -188,5 +220,32 @@
 	
 	.menus > .parts {
 		margin: .2rem .5rem;
+	}
+	
+	.dropdown {
+		background: #6d6d6d;
+		border-radius: 2px;
+		box-shadow: 5px 0px 10px rgba(10,20,20,0.4), 0 10px 16px rgba(10,15,15,0.4);
+		display: none;
+		list-style: none;
+		margin-top: 9vh;
+		right: .5rem;
+		position: absolute;
+		top: 0;
+		width: 5rem;
+		z-index: 1000;
+	}
+	
+	.dropdownActive {
+		display: flex;
+		flex-direction: column
+	}
+	
+	.dropdown-li {
+		padding: 1rem;
+	}
+	
+	.dropdown-li:not(:last-child) {
+		border-bottom: solid 1px lightgrey;
 	}
 </style>

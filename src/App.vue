@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav-bar @sel-instr="instrument = $event"></nav-bar>
+    <nav-bar @sel-instr="instrument = $event" :profile="profile"></nav-bar>
 	
     <view-button></view-button>
    
@@ -8,8 +8,8 @@
 
     <three-container :instrument="instrument"></three-container>
 
-    <router-view id="page" :instrument="instrument"/>
-
+    <router-view id="page" :instrument="instrument" @profile="profile = $event"/>
+	
     <footer-bar></footer-bar>
   </div>
 </template>
@@ -26,7 +26,8 @@ export default {
   name: 'App',
   data() {
       return {
-          instrument: null
+          instrument: null,
+          profile: null
       }
   },
   components: {

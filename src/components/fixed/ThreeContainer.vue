@@ -48,6 +48,29 @@ export default {
     initMeshObj() {
 		var mtlLoader = new ThreeAddons.MTLLoader();
 		var loading = new Promise((res, rej) => {	
+            let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
+				
+            mtlLoader.load(path + '.mtl', (materials) => {
+				materials.preload();
+				var objLoader = new ThreeAddons.OBJLoader();
+				//objLoader.setMaterials(materials);
+				objLoader.load(path + '.obj', (object) => {
+					object.position.y -= 0;
+					object.position.x -= 0;
+					res(object);
+				});
+			});
+		}).then((obj) => {
+			this.mesh = obj;
+			this.scene.add(this.mesh);
+		}).catch((err) => {
+			console.error("Didn't Load Obj");
+			console.error(err);
+		});
+	},
+	initMeshObjBasic() {
+		var mtlLoader = new ThreeAddons.MTLLoader();
+		var loading = new Promise((res, rej) => {	
 			mtlLoader.load('./static/models/r2/r2-d2.mtl', (materials) => {
 				materials.preload();
 				var objLoader = new ThreeAddons.OBJLoader();
@@ -58,18 +81,6 @@ export default {
 					res(object);
 				});
 			});
-//            let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
-//            console.log(path);
-//            mtlLoader.load(path + '.mtl', (materials) => {
-//				materials.preload();
-//				var objLoader = new ThreeAddons.OBJLoader();
-//				//objLoader.setMaterials(materials);
-//				objLoader.load(path + '.obj', (object) => {
-//					object.position.y -= 0;
-//					object.position.x -= 0;
-//					res(object);
-//				});
-//			});
 		}).then((obj) => {
 			this.mesh = obj;
 			this.scene.add(this.mesh);
@@ -122,16 +133,29 @@ export default {
 		this.calcCanvas();
 		this.initSettings();
 		this.initLights();
-		this.initMeshObj();
-		//      this.initMeshCube();
+		this.init3D();
+
 		this.animate();
     },
+	  init3D() {
+		  if (this.instrument)
+				this.initMeshObj();
+			else
+				this.initMeshObjBasic();
+	  }
   },
   mounted() {
 		this.init();
 
 		window.addEventListener('resize', this.resize);
-  }
+  },
+	watch: {
+		instrument() {
+			this.init3D();
+			
+			this.scene.remove(this.scene.children[3]);
+		}
+	}
 }</script>
 
 <style lang="scss" scoped>

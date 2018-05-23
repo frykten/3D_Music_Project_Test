@@ -8,13 +8,13 @@
 
 		<section id="content">
 			<header id="header">
-				<h2>{{instr.name.replace("_", " ")}}</h2>
-				<p>{{instr.type.replace("_", " ")}}</p>
+				<h2>{{instrument.name.replace("_", " ")}}</h2>
+				<p>{{instrument.type.replace("_", " ")}}</p>
 			</header>
 
 			<div id="messages">
 				<ul>
-					<li v-for="i in instr.infos" class="line">{{i}}</li>
+					<li v-for="i in instrument.infos" class="line">{{i}}</li>
 				</ul>
 				
 				<hr id="hr-links">
@@ -71,6 +71,7 @@
 				}
 			}
 		},
+		props: ["instrument"],
         components: {
             MapC
         },

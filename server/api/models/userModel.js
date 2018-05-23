@@ -10,21 +10,23 @@ var UserSchema = new Schema({
 //        required: true
 //    },
 
-    pseudo: {
+    username: {
         type: String,
+        unique: true,
         required: true,
-        unique: true
+		trim: true
     },
 
-    hash_password: {
+    password: {
         type: String,
-        require: true
+        required: true
     },
 
     email: {
         type: String,
+        unique: true,
         required: true,
-        unique: true
+		trim: true
     },
 
     profile_picture_url: {
@@ -39,8 +41,22 @@ var UserSchema = new Schema({
 
 });
 
+//authenticate input against database
 UserSchema.methods.comparePassword = function(password) {
-    return bcrypt.compareSync(password, this.hash_password);
+    return bcrypt.compareSync(password, this.password);
 }
+
+//hashing a password before saving it to the database
+UserSchema.pre('save', function (next) {
+	var user = this;
+	bcrypt.hash(user.password, 10, function (err, hash) {
+
+		if (err)
+			return next(err);
+
+		user.password = hash;
+		next();
+	})
+});
 
 module.exports = mongoose.model('User', UserSchema);
