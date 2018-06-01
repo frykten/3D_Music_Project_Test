@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="3D-container canvas" id="canvas">  </div>
+	<div class="3D-container canvas" id="canvas"></div>
 </template>
 
 <script>
@@ -38,15 +38,9 @@ export default {
         this.renderer.setSize(WIDTH, HEIGHT);
         this.container.el.appendChild(this.renderer.domElement);
     },
-    initMeshCube() {
-        var geometry = new Three.BoxGeometry(0.2, 0.2, 0.2);
-        var material = new Three.MeshNormalMaterial();
-
-        this.mesh = new Three.Mesh(geometry, material);
-        this.scene.add(this.mesh);
-    },
     initMeshObj() {
 		var mtlLoader = new ThreeAddons.MTLLoader();
+		
 		var loading = new Promise((res, rej) => {	
             let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
 				
@@ -56,7 +50,9 @@ export default {
 				//objLoader.setMaterials(materials);
 				objLoader.load(path + '.obj', (object) => {
 					object.position.y -= 0;
-					object.position.x -= 0;
+					object.position.x -= 60;
+					this.camera.position.z = 100;
+					object.name = this.instrument.name;
 					res(object);
 				});
 			});
@@ -64,6 +60,7 @@ export default {
 			this.mesh = obj;
 			this.scene.add(this.mesh);
 		}).catch((err) => {
+			this.initMeshObjBasic();
 			console.error("Didn't Load Obj");
 			console.error(err);
 		});
@@ -71,13 +68,14 @@ export default {
 	initMeshObjBasic() {
 		var mtlLoader = new ThreeAddons.MTLLoader();
 		var loading = new Promise((res, rej) => {	
-			mtlLoader.load('./static/models/r2/r2-d2.mtl', (materials) => {
+			mtlLoader.load('./static/models/default/default.mtl', (materials) => {
 				materials.preload();
 				var objLoader = new ThreeAddons.OBJLoader();
-				//objLoader.setMaterials(materials);
-				objLoader.load('./static/models/r2/r2-d2.obj', (object) => {
-					object.position.y -= 70;
+				objLoader.load('./static/models/default/default.obj', (object) => {
+//					object.position.y += 70;
 					object.position.x -= 0;
+					this.camera.position.z = 10;
+					object.name = this.instrument.name;
 					res(object);
 				});
 			});
@@ -105,6 +103,12 @@ export default {
 		this.scene.add(keyLight);
 		this.scene.add(fillLight);
 		this.scene.add(backLight);
+		
+		var testLight = new Three.AmbientLight(new Three.Color('hsl(217, 65%, 90%)'), 0.1);
+		keyLight.position.set(1000, 0, 0);
+		this.scene.add(testLight);
+
+		console.log(this.scene.children);
     },
     animate() {
         requestAnimationFrame(this.animate);
@@ -138,7 +142,7 @@ export default {
 		this.animate();
     },
 	  init3D() {
-		  if (this.instrument)
+		  if (this.instrument && this.instrument.type == "Electric_Guitar")
 				this.initMeshObj();
 			else
 				this.initMeshObjBasic();
@@ -152,8 +156,9 @@ export default {
 	watch: {
 		instrument() {
 			this.init3D();
+			console.log(this.scene.children);
 			
-			this.scene.remove(this.scene.children[3]);
+			this.scene.remove(this.scene.children[this.scene.children.length-1]);
 		}
 	}
 }</script>

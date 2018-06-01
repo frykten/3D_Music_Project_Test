@@ -23,17 +23,17 @@ export default {
 		border-radius: 3px;
 		box-shadow: 5px 0px 10px rgba(10,20,20,0.4), 0 5px 10px rgba(10,15,15,0.6);
 		display: flex;
-		height: 3rem;
+		height: 4rem;
 		justify-content: center;
-		left: 1.5vw;
+		left: 2rem;
 		position: fixed;
-		top: 12vh;
-		width: 3rem;
+		top: 14vh;
+		width: 4rem;
 	}
 	
 	a, h2 {
 		color: rgb(248, 248, 248);
-		font-size: 1rem;
+		font-size: 1.25rem;
 		font-weight: 700;
 		text-decoration: none;
 	}

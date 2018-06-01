@@ -89,7 +89,9 @@
             }
 		},
         mounted() {
-            this.keytyping(this);
+			if (!window.hasKeyboard)
+				this.keytyping(this);
+			window.hasKeyboard = true;
 			
 			let iName = this.instrument.name.toLowerCase();
 			let iType = this.instrument.type.toLowerCase();

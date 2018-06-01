@@ -79,4 +79,16 @@
 	* {
 		color: lightgrey
 	}
+	
+	button {
+		background: hsl(200, 50%, 37%);
+		border: solid 3px rgba(221, 221, 221, 0.75);
+		border-radius: 3px;
+		margin-top: 1rem;
+		padding: .2rem;
+	}
+	
+	input {
+		color: black;
+	}
 </style>

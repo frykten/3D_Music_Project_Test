@@ -109,6 +109,27 @@ module.exports = (app) => {
 				res.status(400).json({ message: 'Authentication failed. User not found.' });
 			});
 		})
+	
+	app.route('/userdel')
+		.delete((req, res) => {
+			// Get USERNAME
+			let body = req.query.username;
+		
+			if (!body)
+				return res.status(401).json({ message: 'Authentication failed. Username empty ' });
+			
+			return new Promise(function(resolve, reject) {
+				User.remove({username: body}, function(err, user) {
+					if (err)
+						reject(err);
+					resolve(user);
+				});
+			}).then((user) => {
+				res.json(user);
+			}).catch((err) => {
+				res.status(400).json({ message: 'Authentication failed. User not found.' });
+			});
+		})
 
 	// Registering a new user, sends errors if Email or Username already exists
 	app.route('/register')

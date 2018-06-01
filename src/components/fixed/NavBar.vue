@@ -47,12 +47,20 @@
 						</div>
 					</button>
 					<ul id="you-dropdown" ref="youDropdown" class="dropdown you signed" :class="{dropdownActive: isActive}">
+<!--
 						<li class="dropdown-li">
 							<a href="">See profile</a>
 						</li>
+-->
+<!--
 						<li class="dropdown-li">
 							<a href="">Settings?</a>
 						</li>
+-->
+						<li class="dropdown-li">
+							<a href="" @click="unsubscribe()">Unsuscribe</a>
+						</li>
+						
 						<li class="dropdown-li">
 							<a href="" @click="signOut()">Sign Out</a>
 						</li>
@@ -89,6 +97,17 @@
 			},
 			signOut() {
 				this.username = null;
+			},
+			unsubscribe() {
+				console.log(this.username);
+				axios.delete('http://localhost:3000/userdel', {
+					params: { username: this.username }
+				})
+				.then((res) => {
+                    this.username = null;
+				}).catch((err) => {
+					console.error(err.response);
+				});
 			}
         },
 		mounted() {
@@ -99,9 +118,6 @@
 					console.error(err.response);
 				});
 		},
-        updated() {
-            
-        },
         watch: {
             selectedInstr(v) {
                 this.$emit("sel-instr", v);
@@ -110,7 +126,7 @@
 				this.username = this.profile;
 			},
 			username() {
-					this.isLogged = this.username ? true : false;
+				this.isLogged = this.username ? true : false;
 			}
         },
 	}
@@ -196,6 +212,10 @@
 		padding: 0 .5rem;
 /*        position: absolute;*/
     }
+	select {
+		height: 100%;
+		width: 100%;
+	}
 	
 	#search-menu {
 		margin-left: auto;
@@ -243,9 +263,15 @@
 	
 	.dropdown-li {
 		padding: 1rem;
+		word-wrap: break-word;
 	}
 	
 	.dropdown-li:not(:last-child) {
 		border-bottom: solid 1px lightgrey;
+	}
+	
+	button {
+		background: rgba(0,0,0,0);
+		border: 0;
 	}
 </style>
