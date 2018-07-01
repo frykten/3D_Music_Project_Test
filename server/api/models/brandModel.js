@@ -30,5 +30,3 @@ var BrandSchema = new Schema({
 });
 
 module.exports = mongoose.model('Brand', BrandSchema);
-// Vendors are yet to implement on another file
-//module.exports = mongoose.model('Vendor', VendorSchema);

@@ -5,11 +5,6 @@ const mongoose = require('mongoose'),
       ObjectId = Schema.Types.ObjectId;
 
 var UserSchema = new Schema({
-//    _id: {
-//        type: ObjectId,
-//        required: true
-//    },
-
     username: {
         type: String,
         unique: true,
