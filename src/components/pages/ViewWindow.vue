@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <view-infos :instrument="instrument"></view-infos>
+    <view-infos></view-infos>
   </div>
 </template>
 
@@ -15,7 +15,6 @@ export default {
 		return {
 		}
 	},
-	props: ["instrument"],
 }
 </script>
 

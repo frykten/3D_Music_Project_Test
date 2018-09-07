@@ -6,7 +6,7 @@
 			</div>
 		</div>
 
-		<section id="content">
+		<section id="content" >
 			<header id="header">
 				<h2>{{instrument.name.replace("_", " ")}}</h2>
 				<p>{{instrument.type.replace("_", " ")}}</p>
@@ -14,7 +14,7 @@
 
 			<div id="messages">
 				<ul>
-					<li v-for="i in instrument.infos" class="line">{{i}}</li>
+					<li v-for="i in instr.infos" class="line">{{i}}</li>
 				</ul>
 				
 				<hr id="hr-links">
@@ -29,12 +29,14 @@
 
 <script>
     import MapC from './Map.vue'
+    import { EventBus } from '../../eventBus.js'
     
 	export default {
 		data() {
 			return {
 				isHidden: false,
 				arrow: "chevron-left",
+				instrument: null,
 				instr: {
 					type: "Electric_Guitar",
 					name: "Stratocaster_HSS",
@@ -71,7 +73,6 @@
 				}
 			}
 		},
-		props: ["instrument"],
         components: {
             MapC
         },
@@ -80,6 +81,13 @@
 				this.isHidden = !this.isHidden;
 				this.arrow = this.isHidden ? "chevron-left" : "chevron-right";
 			}
+		},
+		mounted() {
+			EventBus.$on('sel-instr', (selectedInstrument) => {
+				console.log(this);
+				this.instrument = selectedInstrument;
+				console.log(this);
+			});
 		}
 	}
 </script>

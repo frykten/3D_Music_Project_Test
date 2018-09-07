@@ -5,6 +5,7 @@
 <script>
 import * as Three from 'three'
 import * as ThreeAddons from 'three-addons'
+import { EventBus } from '../../eventBus.js'
 
 export default {
   data() {
@@ -18,10 +19,11 @@ export default {
       scene: null,
       renderer: null,
       mesh: null,
-      controls: null
+      controls: null,
+
+	  instrument: null
     }
   },
-  props: ["instrument"],
   methods: {
     initSettings() {
         const WIDTH = this.container.width;
@@ -43,6 +45,7 @@ export default {
 		
 		var loading = new Promise((res, rej) => {	
             let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
+console.error(path);
 				
             mtlLoader.load(path + '.mtl', (materials) => {
 				materials.preload();
@@ -75,7 +78,7 @@ export default {
 //					object.position.y += 70;
 					object.position.x -= 0;
 					this.camera.position.z = 10;
-					object.name = this.instrument.name;
+					object.name = "Logo3D";
 					res(object);
 				});
 			});
@@ -107,8 +110,6 @@ export default {
 		var testLight = new Three.AmbientLight(new Three.Color('hsl(217, 65%, 90%)'), 0.1);
 		keyLight.position.set(1000, 0, 0);
 		this.scene.add(testLight);
-
-		console.log(this.scene.children);
     },
     animate() {
         requestAnimationFrame(this.animate);
@@ -144,6 +145,8 @@ export default {
 	  init3D() {
 		  if (this.instrument && this.instrument.type == "Electric_Guitar")
 				this.initMeshObj();
+		  else if (this.instrument && this.instrument.type == "Drumkit")
+				this.initMeshObj();
 			else
 				this.initMeshObjBasic();
 	  }
@@ -153,11 +156,15 @@ export default {
 
 		window.addEventListener('resize', this.resize);
   },
+	created() {
+		EventBus.$on('sel-instr', (selectedInstrument) => {
+			this.instrument = selectedInstrument;
+		});
+	},
 	watch: {
 		instrument() {
 			this.init3D();
-			console.log(this.scene.children);
-			
+
 			this.scene.remove(this.scene.children[this.scene.children.length-1]);
 		}
 	}

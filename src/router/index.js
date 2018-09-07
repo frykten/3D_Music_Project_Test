@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import Home from './../components/pages/Home.vue'
 import LogIn from './../components/pages/LogIn.vue'
 import Register from './../components/pages/Register.vue'
@@ -16,16 +17,33 @@ export default new Router({
       name: 'home',
       component: Home
     },
-	{
+    {
       path: '/login',
       name: 'login',
       component: LogIn
     },
-	{
+    {
       path: '/register',
       name: 'register',
       component: Register
     },
+/*
+    {
+      path: '/user/:id',
+      name: 'profile',
+      component: Profile
+    },
+    {
+      path: '/instrument/:id/view',
+      name: 'view',
+      component: ViewWindow
+    },
+    {
+      path: '/instrument/:id/play',
+      name: 'play',
+      component: PlayWindow
+    },
+*/
     {
       path: '/view',
       name: 'view',
@@ -46,7 +64,7 @@ export default new Router({
       redirect: {
         name: "home"
       },
-  }
+    }
   ],
   mode: "history"
 })

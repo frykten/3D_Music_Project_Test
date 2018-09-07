@@ -7,17 +7,25 @@
 			</div>
 		</router-link>
 
-			<div class="search parts">
+			<div id="search" class="search parts">
 				<div id="search-bar">
 <!--					<input type="text" id="search-input">-->
-                    <select name="instruments" id="search-select" v-model="selectedInstr">
-                        <option value="" selected></option>
-                        <option :value="i" v-for="i in instr">{{i.name}}</option>
-                    </select>
-                    {{username}}
+					<div id="search-placeholder">
+<!-- Empty until V1 -->
+					</div>
+
+					<ul id="search-dropdown-container" class="dropdown">
+						<li class="dropdown-li search-dropdown-li" v-for="i in instr" @click="emitInstrument(i)">
+							<router-link to="/view" @click="emitInstrument(i)">
+								<p>{{i.name}}</p>
+							</router-link>
+
+						</li>
+					</ul>
+
 					<icon name="bars" id="search-menu"></icon>
 				</div>
-<!--				<button class="search-puts" v-for="i in instr" ref="search">{{i}}</button>-->
+
 				<button id="search-submit" ref="submit">
 					<icon name="search" id="search-icon"></icon>
 				</button>
@@ -38,7 +46,7 @@
 					<p>News</p>
 				</div>
 				<div class="parts mini-parts">
-					<button id="you-btn" @click="onYouClick()">
+					<button id="profile-btn" @click="onYouClick()">
 						<icon name="circle"></icon>
 						<div class="mini-parts-row">
 							<p v-if="isLogged">{{username}}</p>
@@ -46,7 +54,7 @@
 							<icon name="caret-down"></icon>
 						</div>
 					</button>
-					<ul id="you-dropdown" ref="youDropdown" class="dropdown you signed" :class="{dropdownActive: isActive}">
+					<ul id="profile-dropdown" ref="profileDropdown" class="dropdown dropdown-profile you signed" :class="{dropdownActive: isProfileButtonActive}">
 <!--
 						<li class="dropdown-li">
 							<a href="">See profile</a>
@@ -57,11 +65,11 @@
 							<a href="">Settings?</a>
 						</li>
 -->
-						<li class="dropdown-li">
+						<li class="profile-dropdown-li">
 							<a href="" @click="unsubscribe()">Unsuscribe</a>
 						</li>
 						
-						<li class="dropdown-li">
+						<li class="profile-dropdown-li">
 							<a href="" @click="signOut()">Sign Out</a>
 						</li>
 					</ul>
@@ -73,6 +81,7 @@
 
 <script>
 	const axios = require('axios');
+	import { EventBus } from '../../eventBus.js';
 	
 	export default {
 		data() {
@@ -82,7 +91,8 @@
 				
 				username: null,
 				isLogged: false,
-				isActive: false
+				isProfileButtonActive: false,
+				isSearchListActive: false,
 			}
 		},
 		props: ["profile"],
@@ -91,9 +101,12 @@
                 console.log(event.target.value);
                 console.log(this.selected);
             },
+            emitInstrument(i){
+				EventBus.$emit('sel-instr', i);
+            },
 			onYouClick() {
-				console.log(this.$refs.youDropdown);
-				this.isActive =  !this.isActive;
+				console.log(this.$refs.profileDropdown);
+				this.isProfileButtonActive =  !this.isProfileButtonActive;
 			},
 			signOut() {
 				this.username = null;
@@ -191,9 +204,9 @@
 		height: 1.6rem;
 		justify-content: center;
 		margin-left: 1rem;
+        max-width: 30vw;
 		min-width: 15rem;
         width: 30rem;
-        max-width: 30vw;
 	}
 	
 	#search-input {
@@ -231,6 +244,26 @@
 		justify-content: center;
 		width: 1.6rem;
 	}
+
+	#search-bar:hover #search-dropdown-container {
+		display: flex;
+		flex-direction: column
+	}
+
+	#search-dropdown-container {
+		margin-top: 2.25rem;
+	}
+
+	.search-dropdown-li {
+		background: red;
+		border-bottom: solid 1px #222;
+		height: 1.6rem;
+		line-height: 1.6rem;        
+		max-width: 30vw;
+		min-width: 15rem;
+		text-align: center;
+        width: 30rem;
+	}
 	
 	#menu {
 		border-left: solid 1px lightgray;
@@ -243,17 +276,20 @@
 	}
 	
 	.dropdown {
+		display: none;
+		list-style: none;
+		position: absolute;
+		z-index: 1000;
+	}
+
+	#profile-dropdown {
 		background: #6d6d6d;
 		border-radius: 2px;
 		box-shadow: 5px 0px 10px rgba(10,20,20,0.4), 0 10px 16px rgba(10,15,15,0.4);
-		display: none;
-		list-style: none;
 		margin-top: 9vh;
 		right: .5rem;
-		position: absolute;
 		top: 0;
 		width: 5rem;
-		z-index: 1000;
 	}
 	
 	.dropdownActive {
@@ -261,12 +297,12 @@
 		flex-direction: column
 	}
 	
-	.dropdown-li {
+	.profile-dropdown-li {
 		padding: 1rem;
 		word-wrap: break-word;
 	}
 	
-	.dropdown-li:not(:last-child) {
+	.profile-dropdown-li:not(:last-child) {
 		border-bottom: solid 1px lightgrey;
 	}
 	

@@ -54,10 +54,9 @@
                 
                 isShift: false,
                 
-//                instrument: null
+                instrument: null
 			}
 		},
-		props: ["instrument"],
 		components: {
 			PlayPanelFx,
             PlayPanelSettings,
@@ -97,6 +96,11 @@
 			let iType = this.instrument.type.toLowerCase();
 			soundApi.loadSounds(iName, iType);
         },
+		created() {
+			EventBus.$on('sel-instr', (selectedInstrument) => {
+				this.instrument = selectedInstrument;
+			});
+		},
         watch: {
             instrument: function() {
                 let iName = this.instrument.name.toLowerCase();
