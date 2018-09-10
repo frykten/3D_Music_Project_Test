@@ -3,6 +3,14 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+// EventBus
+import { EventBus } from './eventBus.js'
+Vue.prototype.$ebus = EventBus
+// Store
+import Vuex from 'vuex'
+Vue.use(Vuex)
+import store from './store.js'
+
 // Font Awesome Use
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
@@ -33,5 +41,12 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-render: h => h(App),
+  render: h => h(App),
+  store,
+  data() {
+    return {
+      
+    }
+  },
+//  created: function() { console.log(this) }
 })

@@ -6,7 +6,7 @@
 			</div>
 		</div>
 
-		<section id="content" >
+		<section id="content" v-if="instrument">
 			<header id="header">
 				<h2>{{instrument.name.replace("_", " ")}}</h2>
 				<p>{{instrument.type.replace("_", " ")}}</p>
@@ -29,14 +29,12 @@
 
 <script>
     import MapC from './Map.vue'
-    import { EventBus } from '../../eventBus.js'
     
 	export default {
 		data() {
 			return {
 				isHidden: false,
 				arrow: "chevron-left",
-				instrument: null,
 				instr: {
 					type: "Electric_Guitar",
 					name: "Stratocaster_HSS",
@@ -67,26 +65,32 @@
 						"Finish: Black",
 						"Made in Mexico",
 					],
-                    infoVendors: {
-                        website: "https://shop.fender.com/en-FR/electric-guitars/stratocaster/american-special-stratocaster-hss/0115700300.html?rl=en_US"
-                    },
+          infoVendors: {
+            website: "https://shop.fender.com/en-FR/electric-guitars/stratocaster/american-special-stratocaster-hss/0115700300.html?rl=en_US"
+          },
 				}
 			}
 		},
-        components: {
-            MapC
-        },
+		computed: {
+			instrument: function () {
+				return this.$store.getters.instrument
+			}
+		},
+    components: {
+      MapC
+    },
 		methods: {
 			showPanel() {
 				this.isHidden = !this.isHidden;
 				this.arrow = this.isHidden ? "chevron-left" : "chevron-right";
 			}
 		},
-		mounted() {
-			EventBus.$on('sel-instr', (selectedInstrument) => {
-				console.log(this);
+		beforeCreate() {
+			console.log("created");
+
+			this.$ebus.$on('sel-instr', (selectedInstrument) => {
 				this.instrument = selectedInstrument;
-				console.log(this);
+				console.log("Instr : " + this.instrument.name);
 			});
 		}
 	}

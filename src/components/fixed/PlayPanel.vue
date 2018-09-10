@@ -42,27 +42,29 @@
 	import PlayPanelPlayPiano from './PlayPanelComponents/PlayPanelPlayPiano.vue'
 	import PlayPanelPlayGuitar from './PlayPanelComponents/PlayPanelPlayGuitar.vue'
     
-    var controlKeyboard = require("./PlayPanelComponents/PlayControllerKeyboard.js")
+  var controlKeyboard = require("./PlayPanelComponents/PlayControllerKeyboard.js")
 	var soundApi = require("./PlayPanelComponents/PlayApi.js");
     
 	export default {
 		data() {
 			return {
 				isLoaded: true,
-                isPlaying: "play",
+        isPlaying: "play",
 				panel: "keyboard",
-                
-                isShift: false,
-                
-                instrument: null
+        isShift: false
+			}
+		},
+		computed: {
+			instrument: function () {
+				return this.$store.getters.instrument
 			}
 		},
 		components: {
 			PlayPanelFx,
-            PlayPanelSettings,
+      PlayPanelSettings,
 			PlayPanelPlayKeyboard,
-            PlayPanelPlayPiano,
-            PlayPanelPlayGuitar,
+      PlayPanelPlayPiano,
+      PlayPanelPlayGuitar,
 		},
 		methods: {
 			changeView(evt) {
@@ -97,7 +99,7 @@
 			soundApi.loadSounds(iName, iType);
         },
 		created() {
-			EventBus.$on('sel-instr', (selectedInstrument) => {
+			this.$ebus.$on('sel-instr', (selectedInstrument) => {
 				this.instrument = selectedInstrument;
 			});
 		},

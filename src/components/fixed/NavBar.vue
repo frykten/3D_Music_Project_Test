@@ -17,7 +17,7 @@
 					<ul id="search-dropdown-container" class="dropdown">
 						<li class="dropdown-li search-dropdown-li" v-for="i in instr" @click="emitInstrument(i)">
 							<router-link to="/view" @click="emitInstrument(i)">
-								<p>{{i.name}}</p>
+								<p class="search-dropdown-li-text">{{i.name}}</p>
 							</router-link>
 
 						</li>
@@ -87,7 +87,7 @@
 		data() {
 			return {
 				instr: [],
-                selectedInstr: null,
+        selectedInstr: null,
 				
 				username: null,
 				isLogged: false,
@@ -95,53 +95,57 @@
 				isSearchListActive: false,
 			}
 		},
-		props: ["profile"],
-        methods: {
-            onChange(){
-                console.log(event.target.value);
-                console.log(this.selected);
-            },
-            emitInstrument(i){
-				EventBus.$emit('sel-instr', i);
-            },
-			onYouClick() {
-				console.log(this.$refs.profileDropdown);
-				this.isProfileButtonActive =  !this.isProfileButtonActive;
-			},
-			signOut() {
-				this.username = null;
-			},
-			unsubscribe() {
-				console.log(this.username);
-				axios.delete('http://localhost:3000/userdel', {
-					params: { username: this.username }
-				})
-				.then((res) => {
-                    this.username = null;
-				}).catch((err) => {
-					console.error(err.response);
-				});
+		computed: {
+			instrument: function () {
+				return this.$store.getters.instrument
 			}
-        },
-		mounted() {
-			axios.get('http://localhost:3000/instr')
-				.then((res) => {
-                    this.instr = res.data;
-				}).catch((err) => {
-					console.error(err.response);
-				});
 		},
-        watch: {
-            selectedInstr(v) {
-                this.$emit("sel-instr", v);
-            },
-			profile() {
-				this.username = this.profile;
-			},
-			username() {
-				this.isLogged = this.username ? true : false;
-			}
-        },
+		props: ["profile"],
+    methods: {
+      onChange(){
+        console.log(event.target.value);
+        console.log(this.selected);
+      },
+      emitInstrument(i){
+			  this.$store.commit('setInstrument', i);
+      },
+      onYouClick() {
+      	console.log(this.$refs.profileDropdown);
+      	this.isProfileButtonActive =  !this.isProfileButtonActive;
+      },
+      signOut() {
+        this.username = null;
+      },
+      unsubscribe() {
+	      axios.delete('http://localhost:3000/userdel', {
+		      params: { username: this.username }
+	      })
+	      .then((res) => {
+                    this.username = null;
+	      }).catch((err) => {
+		      console.error(err.response);
+	      });
+      }
+    },
+    mounted() {
+      axios.get('http://localhost:3000/instr')
+        .then((res) => {
+                    this.instr = res.data;
+        }).catch((err) => {
+	        console.error(err.response);
+        });
+    },
+    watch: {
+      selectedInstr(v) {
+          this.$emit("sel-instr", v);
+      },
+      profile() {
+	      this.username = this.profile;
+      },
+      username() {
+	      this.isLogged = this.username ? true : false;
+      }
+    },
 	}
 </script>
 
@@ -255,15 +259,19 @@
 	}
 
 	.search-dropdown-li {
-		background: red;
-		border-bottom: solid 1px #222;
+		background: #EEE;
+		border-bottom: solid 1px rgba(25, 25, 25, .25);
 		height: 1.6rem;
 		line-height: 1.6rem;        
 		max-width: 30vw;
 		min-width: 15rem;
 		text-align: center;
-        width: 30rem;
+    width: 30rem;
 	}
+
+	.search-dropdown-li .search-dropdown-li-text {
+    color: #333;
+  }
 	
 	#menu {
 		border-left: solid 1px lightgray;

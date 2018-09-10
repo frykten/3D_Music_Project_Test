@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav-bar @sel-instr="instrument = $event" :profile="profile"></nav-bar>
+    <nav-bar :profile="profile"></nav-bar>
 	
     <view-button></view-button>
    
@@ -8,7 +8,7 @@
 
     <three-container :instrument="instrument"></three-container>
 
-    <router-view id="page" :instrument="instrument" @profile="profile = $event"/>
+    <router-view @profile="profile = $event"/>
 	
     <footer-bar></footer-bar>
   </div>

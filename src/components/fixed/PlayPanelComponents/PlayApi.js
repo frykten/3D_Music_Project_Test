@@ -4,6 +4,7 @@ var bankSounds = [];
 
 export function loadSounds(iName, iType) {
 	bankSounds = [];
+  Howler._howls = [];
 	
 	let path = "/static/sounds/" + iType + "/" + iName;
 	
@@ -82,15 +83,21 @@ export function loadSounds(iName, iType) {
 			}
 			
 			const sound = new Howl ({
-				src: [path + "/" + note + ".wav"],
-				preload: true
+				html5: true,
+				preload: true,
+				src: [path + "/" + note + ".wav"]
 			});
 			bankSounds.push(sound);
 		}
 	}
 };
 
+export function setVolume(newVolume) {
+  Howler.volume(newVolume);
+}
+
 export function getSound(note) {
 //	console.log("Sound no." + note);
+    console.log(Howler);
     bankSounds[note].play();
 }

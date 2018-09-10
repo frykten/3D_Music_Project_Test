@@ -1,11 +1,13 @@
 <template lang="html">
-	<div class="3D-container canvas" id="canvas"></div>
+  <div id="wrapper">
+	  <div class="3D-container canvas" id="canvas"></div>
+    <icon name="cog" scale="3" spin id="loading-message" class="loading-message" v-if="this.$route.name != 'home' && loadToCount != 100"></icon>
+  </div>
 </template>
 
 <script>
 import * as Three from 'three'
 import * as ThreeAddons from 'three-addons'
-import { EventBus } from '../../eventBus.js'
 
 export default {
   data() {
@@ -20,8 +22,15 @@ export default {
       renderer: null,
       mesh: null,
       controls: null,
-
-	  instrument: null
+      loadToCount: 100
+    }
+  },
+  computed: {
+    instrument: function () {
+      return this.$store.getters.instrument
+    },
+    loadCounter: function() {
+      return `Loading 3D: ${this.loadToCount}%`
     }
   },
   methods: {
@@ -44,10 +53,9 @@ export default {
 		var mtlLoader = new ThreeAddons.MTLLoader();
 		
 		var loading = new Promise((res, rej) => {	
-            let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
-console.error(path);
+      let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
 				
-            mtlLoader.load(path + '.mtl', (materials) => {
+      mtlLoader.load(path + '.mtl', (materials) => {
 				materials.preload();
 				var objLoader = new ThreeAddons.OBJLoader();
 				//objLoader.setMaterials(materials);
@@ -57,7 +65,9 @@ console.error(path);
 					this.camera.position.z = 100;
 					object.name = this.instrument.name;
 					res(object);
-				});
+				}, (xhr) => {
+          this.loadToCount = ((xhr.loaded / xhr.total) * 100);
+        });
 			});
 		}).then((obj) => {
 			this.mesh = obj;
@@ -80,7 +90,9 @@ console.error(path);
 					this.camera.position.z = 10;
 					object.name = "Logo3D";
 					res(object);
-				});
+				}, (xhr) => {
+          this.loadToCount = ((xhr.loaded / xhr.total) * 100);
+        });
 			});
 		}).then((obj) => {
 			this.mesh = obj;
@@ -157,7 +169,7 @@ console.error(path);
 		window.addEventListener('resize', this.resize);
   },
 	created() {
-		EventBus.$on('sel-instr', (selectedInstrument) => {
+		this.$ebus.$on('sel-instr', (selectedInstrument) => {
 			this.instrument = selectedInstrument;
 		});
 	},
@@ -168,7 +180,7 @@ console.error(path);
 			this.scene.remove(this.scene.children[this.scene.children.length-1]);
 		}
 	}
-}</script>
+}</script>loading
 
 <style lang="scss" scoped>
 #canvas {
@@ -183,5 +195,15 @@ console.error(path);
 
 #canvas:focus {
     outline: none !important;
+}
+
+#loading-message {
+  color: red;
+  font-size: 4rem;
+  line-height: 4rem;
+  position: absolute;
+  text-align: center;
+  top: calc(50vh - 2rem);
+//  width: 100vw;
 }
 </style>
