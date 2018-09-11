@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <play-panel :instrument="instrument"></play-panel>
+    <play-panel></play-panel>
   </div>
 </template>
 
@@ -10,14 +10,14 @@ import PlayPanel from './../fixed/PlayPanel.vue'
 export default {
   data() {
     return {
-
     }
   },
-  props: ["instrument"],
   components: {
     PlayPanel,
-
-  }
+  },
+  destroyed() {
+    window.hasKeyboard = false;
+  },
 }
 </script>
 

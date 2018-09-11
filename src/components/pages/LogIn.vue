@@ -50,19 +50,20 @@
 		box-shadow: 5px 0px 10px rgba(10,20,20,0.4), 0 10px 16px rgba(10,15,15,0.4);
 		border: solid 2px white;
 		display: flex;
-		height: 33%;
-		justify-content: space-between;
+    flex-direction: column;
+		height: 50%;
+		justify-content: space-around;
+    margin: 0 33vw;
 		padding: 0.5rem;
 		position: fixed;
-		top: 33%;
-		width: 50vw;
+		top: 25%;
+		width: 34vw;
 		z-index: 100;
 	}
 	
 	* {
 		color: lightgrey
 	}
-	
 		
 	button {
 		background: hsl(200, 50%, 37%);

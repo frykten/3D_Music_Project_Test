@@ -15,7 +15,7 @@
 					</div>
 
 					<ul id="search-dropdown-container" class="dropdown">
-						<li class="dropdown-li search-dropdown-li" v-for="i in instr" @click="emitInstrument(i)">
+						<li class="dropdown-li search-dropdown-li" v-for="i in instruments" @click="emitInstrument(i)">
 							<router-link to="/view" @click="emitInstrument(i)">
 								<p class="search-dropdown-li-text">{{i.name}}</p>
 							</router-link>
@@ -45,7 +45,7 @@
 					<icon name="calendar-alt"></icon>
 					<p>News</p>
 				</div>
-				<div class="parts mini-parts">
+				<div id="profile" class="parts mini-parts">
 					<button id="profile-btn" @click="onYouClick()">
 						<icon name="circle"></icon>
 						<div class="mini-parts-row">
@@ -54,7 +54,7 @@
 							<icon name="caret-down"></icon>
 						</div>
 					</button>
-					<ul id="profile-dropdown" ref="profileDropdown" class="dropdown dropdown-profile you signed" :class="{dropdownActive: isProfileButtonActive}">
+					<ul id="profile-dropdown" ref="profileDropdown" class="dropdown dropdown-profile you signed">
 <!--
 						<li class="dropdown-li">
 							<a href="">See profile</a>
@@ -86,13 +86,11 @@
 	export default {
 		data() {
 			return {
-				instr: [],
+				instruments: [],
         selectedInstr: null,
 				
 				username: null,
 				isLogged: false,
-				isProfileButtonActive: false,
-				isSearchListActive: false,
 			}
 		},
 		computed: {
@@ -108,10 +106,6 @@
       },
       emitInstrument(i){
 			  this.$store.commit('setInstrument', i);
-      },
-      onYouClick() {
-      	console.log(this.$refs.profileDropdown);
-      	this.isProfileButtonActive =  !this.isProfileButtonActive;
       },
       signOut() {
         this.username = null;
@@ -130,7 +124,7 @@
     mounted() {
       axios.get('http://localhost:3000/instr')
         .then((res) => {
-                    this.instr = res.data;
+                    this.instruments = res.data;
         }).catch((err) => {
 	        console.error(err.response);
         });
@@ -300,7 +294,7 @@
 		width: 5rem;
 	}
 	
-	.dropdownActive {
+	#profile:hover #profile-dropdown {
 		display: flex;
 		flex-direction: column
 	}

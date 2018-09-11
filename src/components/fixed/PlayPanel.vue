@@ -67,29 +67,37 @@
       PlayPanelPlayGuitar,
 		},
 		methods: {
-			changeView(evt) {
-                this.isPlaying = evt;
+		  changeView(evt) {
+        this.isPlaying = evt;
 			},
-            changePanel(evt) {
-				this.panel = evt;
-            },
-            keytyping(that) {
-                window.addEventListener("keydown", function (evt) {
-                    that.isShift = evt.shiftKey || evt.getModifierState( 'CapsLock' ) || false;
-                    
-                    if (evt.key === undefined)
-                        return;
-                    
-                    let instr = that.instrument;
+      changePanel(evt) {
+			  this.panel = evt;
+      },
+      keytyping(that) {
+        window.addEventListener("keydown", function playANote(evt) {
+          if (!window.hasKeyboard)
+            return;
 
-                    controlKeyboard.getSound(instr, evt);
-                }, true);
-                window.addEventListener("keyup", (evt => {
-                    that.isShift = evt.getModifierState( 'CapsLock' ) || evt.shiftKey || false;
-                }), true);
-            }
+          that.isShift = evt.shiftKey || evt.getModifierState( 'CapsLock' ) || false;
+          
+          if (evt.key === undefined)
+              return;
+          
+          let instr = that.instrument;
+
+          controlKeyboard.getSound(instr, evt);
+        }, true);
+        window.addEventListener("keyup", (evt => {
+          that.isShift = evt.getModifierState( 'CapsLock' ) || evt.shiftKey || false;
+        }), true);
+      }
 		},
-        mounted() {
+    created() {
+			this.$ebus.$on('sel-instr', (selectedInstrument) => {
+				this.instrument = selectedInstrument;
+			});
+		},
+    mounted() {
 			if (!window.hasKeyboard)
 				this.keytyping(this);
 			window.hasKeyboard = true;
@@ -97,20 +105,15 @@
 			let iName = this.instrument.name.toLowerCase();
 			let iType = this.instrument.type.toLowerCase();
 			soundApi.loadSounds(iName, iType);
-        },
-		created() {
-			this.$ebus.$on('sel-instr', (selectedInstrument) => {
-				this.instrument = selectedInstrument;
-			});
-		},
-        watch: {
-            instrument: function() {
-                let iName = this.instrument.name.toLowerCase();
-                let iType = this.instrument.type.toLowerCase();
-                
-                soundApi.loadSounds(iName, iType);
-            }
+    },
+    watch: {
+        instrument: function() {
+            let iName = this.instrument.name.toLowerCase();
+            let iType = this.instrument.type.toLowerCase();
+            
+            soundApi.loadSounds(iName, iType);
         }
+    }
 	}
 </script>
 

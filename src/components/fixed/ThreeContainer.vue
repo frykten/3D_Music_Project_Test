@@ -54,6 +54,7 @@ export default {
 		
 		var loading = new Promise((res, rej) => {	
       let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
+console.info(path);
 				
       mtlLoader.load(path + '.mtl', (materials) => {
 				materials.preload();

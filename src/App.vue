@@ -6,7 +6,7 @@
    
     <chat-window></chat-window>
 
-    <three-container :instrument="instrument"></three-container>
+    <three-container></three-container>
 
     <router-view @profile="profile = $event"/>
 	
@@ -26,7 +26,6 @@ export default {
   name: 'App',
   data() {
       return {
-          instrument: null,
           profile: null
       }
   },
