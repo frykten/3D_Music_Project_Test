@@ -51,7 +51,8 @@
 				isLoaded: true,
         isPlaying: "play",
 				panel: "keyboard",
-        isShift: false
+        isShift: false,
+        isFunctionnal: false
 			}
 		},
 		computed: {
@@ -74,22 +75,28 @@
 			  this.panel = evt;
       },
       keytyping(that) {
-        window.addEventListener("keydown", function playANote(evt) {
-          if (!window.hasKeyboard)
+        if (that.isFunctionnal)
+          return;
+
+        window.addEventListener("keydown", that.playANote, true);
+        window.addEventListener("keyup", that.setShiftState, true);
+        that.isFunctionnal = true;
+      },
+      playANote(event) {
+        if (!window.hasKeyboard)
+          return;
+
+        this.setShiftState(event)
+
+        if (event.key === undefined)
             return;
 
-          that.isShift = evt.shiftKey || evt.getModifierState( 'CapsLock' ) || false;
-          
-          if (evt.key === undefined)
-              return;
-          
-          let instr = that.instrument;
+        let instr = this.instrument;
 
-          controlKeyboard.getSound(instr, evt);
-        }, true);
-        window.addEventListener("keyup", (evt => {
-          that.isShift = evt.getModifierState( 'CapsLock' ) || evt.shiftKey || false;
-        }), true);
+        controlKeyboard.getSound(instr, event);
+      },
+      setShiftState(event) {
+        this.isShift = event.shiftKey || event.getModifierState( 'CapsLock' ) || false;
       }
 		},
     created() {
@@ -106,6 +113,9 @@
 			let iType = this.instrument.type.toLowerCase();
 			soundApi.loadSounds(iName, iType);
     },
+    destroyed() {
+      window.removeEventListener("keydown", this.playANote, true);
+		},
     watch: {
         instrument: function() {
             let iName = this.instrument.name.toLowerCase();

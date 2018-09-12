@@ -33,10 +33,21 @@
 					username: this.username,
 					password: this.password
 				}).then((response) => {
-					console.log(response.data._id);
+					console.log(response);
+					console.log("Id profile: " + response.data._id);
+
+          if(response.status === 200) {
+              this.$session.start();
+              this.$session.set('name', response.data.username);
+          }
+
+          this.$store.commit('setProfile', response.data);
+
+          this.$router.push('/');
 					this.$emit("profile", response.data.username);
 				}).catch((error) => {
 					console.error(error.response);
+          alert('Wrong username or password. Please try again or register if you haven\'t done so yet.');
 				});
 			}
 		},

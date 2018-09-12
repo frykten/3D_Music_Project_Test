@@ -13,9 +13,10 @@
 			</header>
 
 			<div id="messages">
-				<ul>
+				<ul v-if="instrument.type != 'Drumkit'">
 					<li v-for="i in instr.infos" class="line">{{i}}</li>
 				</ul>
+        <div v-else><p>Informations for this instrument has not been uploaded yet.</p></div>
 				
 				<hr id="hr-links">
 				<a target="_blank" rel="noopener noreferrer" class="links" :href="instr.infoVendors.website">Shop on Fender Merch</a>
@@ -86,12 +87,6 @@
 			}
 		},
 		beforeCreate() {
-			console.log("created");
-
-			this.$ebus.$on('sel-instr', (selectedInstrument) => {
-				this.instrument = selectedInstrument;
-				console.log("Instr : " + this.instrument.name);
-			});
 		}
 	}
 </script>

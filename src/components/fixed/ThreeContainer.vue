@@ -54,16 +54,24 @@ export default {
 		
 		var loading = new Promise((res, rej) => {	
       let path = './static/models/' + this.instrument.type + '/' + this.instrument.name + '/' + this.instrument.name;
-console.info(path);
+      console.info(path);
 				
       mtlLoader.load(path + '.mtl', (materials) => {
 				materials.preload();
 				var objLoader = new ThreeAddons.OBJLoader();
 				//objLoader.setMaterials(materials);
 				objLoader.load(path + '.obj', (object) => {
-					object.position.y -= 0;
-					object.position.x -= 60;
-					this.camera.position.z = 100;
+          if (this.instrument.type == "Drumkit") {
+					  object.position.y -= 75;
+					  object.position.x -= 30;
+					  this.camera.position.z = 200;
+          }
+          else {
+					  object.position.y -= 0;
+					  object.position.x -= 60;
+					  this.camera.position.z = 100;
+          }
+
 					object.name = this.instrument.name;
 					res(object);
 				}, (xhr) => {
@@ -206,5 +214,9 @@ console.info(path);
   text-align: center;
   top: calc(50vh - 2rem);
 //  width: 100vw;
+}
+
+.waiting {
+  cursor: pointer;
 }
 </style>

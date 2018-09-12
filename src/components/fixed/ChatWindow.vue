@@ -62,7 +62,7 @@
 		height: 22rem;
 		position: absolute;
 		width: 15rem;
-        z-index: 100;
+	        z-index: 100;
 	}
 
 	.hidden {

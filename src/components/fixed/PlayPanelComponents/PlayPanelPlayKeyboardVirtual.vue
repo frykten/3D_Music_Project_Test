@@ -6,13 +6,13 @@
 		
 		<div id="legend" class="pad">
             <p id="legend-text">Legend</p>
-		    <p class="btn chord-6">6th chord</p>
-		    <p class="btn chord-5">5th chord</p>
-		    <p class="btn chord-4">4th chord</p>
-		    <p class="btn chord-3">3rd chord</p>
-		    <p class="btn chord-2">2nd chord</p>
-		    <p class="btn chord-1">1st chord</p>
-		    <p class="btn special">special key</p>
+		    <p class="btn chord-6">{{ instrument.type == 'Electric_Guitar' ? '6th chord' : 'snare' }}</p>
+		    <p class="btn chord-5">{{ instrument.type == 'Electric_Guitar' ? '5th chord' : 'kick' }}</p>
+		    <p class="btn chord-4">{{ instrument.type == 'Electric_Guitar' ? '4th chord' : 'hi-hat' }}</p>
+		    <p class="btn chord-3">{{ instrument.type == 'Electric_Guitar' ? '3rd chord' : 'toms' }}</p>
+		    <p class="btn chord-2">{{ instrument.type == 'Electric_Guitar' ? '2nd chord' : 'ride' }}</p>
+		    <p class="btn chord-1">{{ instrument.type == 'Electric_Guitar' ? '1st chord' : 'crash' }}</p>
+		    <p class="btn special">{{ instrument.type == 'Electric_Guitar' ? 'special key' : 'special key' }}</p>
 		    <p class="btn disabled">not used</p>
 		</div>
 		
@@ -386,7 +386,12 @@
 				],
 			}
 		},
-        props: ['childInstr', 'isShift'],
+		computed: {
+			instrument: function () {
+				return this.$store.getters.instrument
+			}
+		},
+    props: ['childInstr', 'isShift'],
 		methods: {
 			activeBtn(event) {
                 let target = event.target.closest("li");

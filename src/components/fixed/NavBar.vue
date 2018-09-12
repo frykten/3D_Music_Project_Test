@@ -9,8 +9,9 @@
 
 			<div id="search" class="search parts">
 				<div id="search-bar">
-<!--					<input type="text" id="search-input">-->
+<!--					<input type="text" id="search-input"> -->
 					<div id="search-placeholder">
+            <p id="search-placeholder-text" v-if="instrument">{{instrument.name}}</p>
 <!-- Empty until V1 -->
 					</div>
 
@@ -46,15 +47,17 @@
 					<p>News</p>
 				</div>
 				<div id="profile" class="parts mini-parts">
-					<button id="profile-btn" @click="onYouClick()">
-						<icon name="circle"></icon>
-						<div class="mini-parts-row">
-							<p v-if="isLogged">{{username}}</p>
-							<p v-else><router-link to="/login">Log In</router-link></p>
-							<icon name="caret-down"></icon>
-						</div>
-					</button>
-					<ul id="profile-dropdown" ref="profileDropdown" class="dropdown dropdown-profile you signed">
+          <router-link to="/register">
+					  <button id="profile-btn">
+						  <icon name="circle" :scale="isLogged ? 2 : 1" :class="{ circleProfileActive: isLogged }"></icon>
+						  <div class="mini-parts-row">
+							  <p v-if="isLogged">{{username}}</p>
+							  <p v-else>Log In </p>
+							  <icon name="caret-down" class="navbar-icon"></icon>
+						  </div>
+					  </button>
+          </router-link>
+					<ul id="profile-dropdown" ref="profileDropdown" class="dropdown dropdown-profile you signed" v-if="username">
 <!--
 						<li class="dropdown-li">
 							<a href="">See profile</a>
@@ -65,6 +68,12 @@
 							<a href="">Settings?</a>
 						</li>
 -->
+						<li class="profile-dropdown-li">
+              <router-link to="/your-profile">
+  							<a href="">Your Profile</a>
+              </router-link>
+						</li>
+
 						<li class="profile-dropdown-li">
 							<a href="" @click="unsubscribe()">Unsuscribe</a>
 						</li>
@@ -81,42 +90,44 @@
 
 <script>
 	const axios = require('axios');
-	import { EventBus } from '../../eventBus.js';
 	
 	export default {
 		data() {
 			return {
 				instruments: [],
         selectedInstr: null,
-				
-				username: null,
+
+        username: null,
 				isLogged: false,
 			}
 		},
 		computed: {
 			instrument: function () {
 				return this.$store.getters.instrument
+			},
+      profile: function () {
+				return this.$store.getters.profile
 			}
 		},
-		props: ["profile"],
     methods: {
-      onChange(){
-        console.log(event.target.value);
-        console.log(this.selected);
-      },
       emitInstrument(i){
 			  this.$store.commit('setInstrument', i);
       },
       signOut() {
-        this.username = null;
+        this.$store.commit('setProfile', null);
+        this.$session.destroy();
+        this.$router.push('/');
       },
       unsubscribe() {
 	      axios.delete('http://localhost:3000/userdel', {
 		      params: { username: this.username }
 	      })
 	      .then((res) => {
-                    this.username = null;
+          this.username = null;
+          this.$session.destroy();
+          this.$router.push('/');
 	      }).catch((err) => {
+          alert('Something was wrong, you couldn\'t unsubscribe. Please try again.');
 		      console.error(err.response);
 	      });
       }
@@ -124,17 +135,17 @@
     mounted() {
       axios.get('http://localhost:3000/instr')
         .then((res) => {
-                    this.instruments = res.data;
+          this.instruments = res.data;
         }).catch((err) => {
 	        console.error(err.response);
         });
     },
     watch: {
-      selectedInstr(v) {
-          this.$emit("sel-instr", v);
-      },
       profile() {
-	      this.username = this.profile;
+        if (this.profile)
+          this.username = this.profile.username;
+        else
+          this.username = null;
       },
       username() {
 	      this.isLogged = this.username ? true : false;
@@ -152,6 +163,7 @@
 		height: 9vh;
 		justify-content: space-between;
 		padding: 0.5rem;
+		padding-right: 0  ;
 		position: fixed;
 		width: 100vw;
 		z-index: 100;
@@ -206,6 +218,11 @@
 		min-width: 15rem;
         width: 30rem;
 	}
+
+  #search-placeholder-text {
+    color: #333;
+    margin-left: .5rem;
+  }
 	
 	#search-input {
 		border: 0;
@@ -284,6 +301,11 @@
 		z-index: 1000;
 	}
 
+  #profile {
+    cursor: pointer;
+    width: 5rem;
+  }
+
 	#profile-dropdown {
 		background: #6d6d6d;
 		border-radius: 2px;
@@ -307,6 +329,14 @@
 	.profile-dropdown-li:not(:last-child) {
 		border-bottom: solid 1px lightgrey;
 	}
+
+  .navbar-icon {
+    color: lightgrey;
+  }
+
+  .circleProfileActive {
+    color: red;
+  }
 	
 	button {
 		background: rgba(0,0,0,0);

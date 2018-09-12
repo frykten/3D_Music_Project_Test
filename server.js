@@ -10,14 +10,16 @@ require('dotenv').config({ path: './server/config/local/.env' });
 console.log('Server environment : ' + process.env.NODE_ENV.trim());
 
 let app = express(),
-	cors = require('cors'),
+    cors = require('cors'),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
-    jsonwebtoken = require("jsonwebtoken");
+    jsonwebtoken = require("jsonwebtoken"),
+    uuidv4 = require('uuid/v4');
 
 //Load models
 let User = require('./server/api/models/userModel'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser');
 
 // Enable All CORS Requests
 app.options('*', cors({credentials: true}));
@@ -66,24 +68,31 @@ if (process.env.NODE_ENV.trim() == 'local') {
     mongoose.connect('mongodb://' + process.env.DB_USER.trim() + ':' + process.env.DB_PASSWORD.trim() + '@' + process.env.DB_HOST.trim() + '/' + process.env.DB_DATABASE.trim())
 }
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //importing routes
 let userRoutes = require('./server/api/routes/userRoutes');
 userRoutes(app);
 
+
 let session = require('express-session'),
-	MongoStore = require('connect-mongo')(session);
+	MongoStore = require('connect-mongo')(session),
+  passport = require('passport');
+
 app.use(session({
 	cookie: { secure: true },
 	saveUninitialized: false,
+	resave: false,
 	secret: "music",
 	store: new MongoStore({
 		mongooseConnection: mongoose.connection
 	}),
 	resave: true,
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(function(req, res) {
     res.status(404).send({ url: req.originalUrl + ' is not implemented' })

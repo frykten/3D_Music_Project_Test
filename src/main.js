@@ -10,6 +10,9 @@ Vue.prototype.$ebus = EventBus
 import Vuex from 'vuex'
 Vue.use(Vuex)
 import store from './store.js'
+// Vue Session
+import VueSession from 'vue-session'
+Vue.use(VueSession)
 
 // Font Awesome Use
 import 'vue-awesome/icons'

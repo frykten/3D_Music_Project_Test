@@ -51,7 +51,9 @@
 				}).then((response) => {
 					console.log(response);
 					console.log(response.data._id);
-					this.$emit("profile", response.data.username);
+
+          this.$router.push('/login');
+          alert('You registered. You can login now');
 				}).catch((error) => {
 					console.error(error.response);
 				});
