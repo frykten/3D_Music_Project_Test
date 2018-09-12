@@ -4,7 +4,10 @@
 
 		<article id="inputs">
         <div v-for="(value, line) in profileToShow">
-<span class="lines">				  <p class="lines">{{line}}: {{value}}</p><hr></span>
+          <span class="lines">
+            <p class="lines">{{line}}: {{value}}</p>
+            <hr>
+          </span>
         </div>
 		</article>
 	</section>

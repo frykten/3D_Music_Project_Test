@@ -3,7 +3,7 @@
 		<section id="welcome-text">
 			<h1 id="title">Great Fire's Jam Session</h1>
 			<h3 id="tagline">The website where you stalk information and jam at the same time</h3>
-			<p id="main-text">Ever wanted to buy a new musical instrument online but coudln't try it out? Ever wanted to jam at a music shop with the clerks and other customers? Here we got the solution...  <br>Catch 'em all!</p>
+			<p id="main-text">Ever wanted to buy a new musical instrument online but couldn't try it out? Ever wanted to jam at a music shop with the clerks and other customers? Here we got the solution...  <br>Catch 'em all!</p>
 		</section>
 	</div>
 </template>
