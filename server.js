@@ -16,7 +16,7 @@ let app = express(),
     jsonwebtoken = require("jsonwebtoken"),
     uuidv4 = require('uuid/v4');
 
-//Load models
+// Load models
 let User = require('./server/api/models/userModel'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser');
@@ -24,7 +24,7 @@ let User = require('./server/api/models/userModel'),
 // Enable All CORS Requests
 app.options('*', cors({credentials: true}));
 
-// interceptor : verify the authorization   
+// Interceptor : verify the authorization   
 app.use(function(req, res, next) {
      // Website you wish to allow to connect
      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
      // to the API (e.g. in case you use sessions)
      res.setHeader('Access-Control-Allow-Credentials', true);
 
-    //to fix the CORS OPTIONS
+    // To fix the CORS OPTIONS
     if(req && req.method=="OPTIONS"){
         req.method=req.headers["access-control-request-method"];
     }
@@ -76,7 +76,7 @@ app.use(cookieParser());
 let userRoutes = require('./server/api/routes/userRoutes');
 userRoutes(app);
 
-
+// Session
 let session = require('express-session'),
 	MongoStore = require('connect-mongo')(session),
   passport = require('passport');
@@ -94,10 +94,25 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
 app.use(function(req, res) {
     res.status(404).send({ url: req.originalUrl + ' is not implemented' })
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log('Guitars : RESTful API server started on: ' + port);	
+});
+
+// Using WebSockets
+const io = require('socket.io')(server);
+
+io.on('connection', function(socket) {
+    socket.on('SEND_MESSAGE', function(data) {
+      io.emit('MESSAGE', data)
+    });
+  
+    socket.on("error", function(err) {
+      socket.emit("GOT_ERROR", err);
+    });
 });

@@ -6,7 +6,7 @@
 			<article id="inputs">
 					<input type="text" ref="username" name="logusername" placeholder="username" required="" v-model="username">
 					<hr>
-					<input type="text" ref="password" name="logpassword" placeholder="password" required="" v-model="password">
+					<input type="password" ref="password" name="logpassword" placeholder="password" required="" v-model="password">
 					<hr>
 
 					<button @click="login()">Submit</button>

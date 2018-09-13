@@ -8,9 +8,9 @@
 					<hr>
 					<input type="text" ref="username" name="logusername" placeholder="username" required="" v-model="username">
 					<hr>
-					<input type="text" ref="password" name="logpassword" placeholder="password" required="" v-model="password">
+					<input type="password" ref="password" name="logpassword" placeholder="password" required="" v-model="password">
 					<hr>
-					<input type="text" ref="passwordConf" name="logpasswordConf" placeholder="confirm password" required="" v-model="passwordConf">
+					<input type="password" ref="passwordConf" name="logpasswordConf" placeholder="confirm password" required="" v-model="passwordConf">
 					<hr>
 
 					<button @click="register()">Submit</button>
